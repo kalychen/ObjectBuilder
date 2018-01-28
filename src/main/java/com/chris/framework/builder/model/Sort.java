@@ -18,12 +18,12 @@ public class Sort {
     }
 
     public Sort(String sortType) {
-        this.sortType = sortType;
+        this.sortType = sortType.toUpperCase();
         this.byField = "id";
     }
 
     public Sort(String sortType, String byField) {
-        this.sortType = sortType;
+        this.sortType = sortType.toUpperCase();
         this.byField = byField;
     }
 
@@ -32,7 +32,7 @@ public class Sort {
     }
 
     public void setSortType(String sortType) {
-        this.sortType = sortType;
+        this.sortType = sortType.toUpperCase();
     }
 
     public String getByField() {

@@ -47,10 +47,11 @@ public class QueryManager {
         //1. 先构建个简单的，用*
         StringBuilder sql = new StringBuilder("SELECT * FROM ").append(condition.getTableName());
         //3. 获取条件
-        String sql1 = condition.createSql();
-        if (!StringUtils.isEmpty(sql1)) {
-            sql.append(" WHERE ").append(sql1);
+        String listSql = condition.createSql();
+        if (!StringUtils.isEmpty(listSql)) {
+            sql.append(" WHERE ").append(listSql);
         }
+        MsgUtils.println(sql);
         return sql.toString();
     }
 
@@ -65,11 +66,10 @@ public class QueryManager {
         StringBuilder sql = new StringBuilder("SELECT * FROM ").append(pageable.getCondition().getTableName());
         //3. 获取条件
         String pageSql = pageable.create();
-
-
         if (!StringUtils.isEmpty(pageSql)) {
             sql.append(" WHERE ").append(pageSql);
         }
+        MsgUtils.println(sql);
         return sql.toString();
     }
 
@@ -455,6 +455,32 @@ public class QueryManager {
     }
 
     /**
+     * 给一个查询条件增加排序
+     *
+     * 通过类clazz找到基本数据类型，获取数据库表信息，在构建好的基本查询sql条件后面增加排序条件
+     * @param clazz 返回数据类
+     * @param params 参数体
+     * @param condition 查询条件
+     */
+    private static void addSortToCondition(Class<?> clazz,Object params,Condition condition){
+        //3. 获取排序数据
+        Field sortField = TypeUtils.getFieldByTypeFromObject(params, Sort.class);
+        if (sortField != null) {
+            sortField.setAccessible(true);
+            try {
+                Sort sort = (Sort) sortField.get(params);
+                //sort中的byField要从数据表中获取列名
+                String byFieldName = sort.getByField();
+                sort.setByField(getColumnNameByOrmClass(TypeUtils.getBaseEntityClass(clazz), byFieldName));
+                condition.sort(sort);
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+            sortField.setAccessible(false);
+        }
+    }
+
+    /**
      * 请求一个集合
      *
      * @param params
@@ -465,11 +491,14 @@ public class QueryManager {
     public static <T> List<T> queryList(Object params, Class<T> clazz) {
         //获取基本数据类型
         Class<?> baseEntityClass = TypeUtils.getBaseEntityClass(clazz);
+        Condition condition = buildCondition(params);
+        addSortToCondition(clazz,params,condition);//增加排序条件
+        String sql = QueryManager.buildQuery(condition);
         if (baseEntityClass == null) {
-            return QueryManager.query(QueryManager.buildCondition(params).createSql(), clazz);
+            return QueryManager.query(sql, clazz);
         }
         //否则就需要扩展
-        return ExpandUtils.expandList(QueryManager.query(QueryManager.buildCondition(params).createSql(), baseEntityClass), clazz);
+        return ExpandUtils.expandList(QueryManager.query(sql, baseEntityClass), clazz);
     }
 
     /**
@@ -491,21 +520,9 @@ public class QueryManager {
         //2. 构建查询条件
         Pageable pageable = null;
         Condition condition = buildCondition(params);
-        //3. 获取排序数据
-        Field sortField = TypeUtils.getFieldByTypeFromObject(params, Sort.class);
-        if (sortField != null) {
-            sortField.setAccessible(true);
-            try {
-                Sort sort = (Sort) sortField.get(params);
-                //sort中的byField要从数据表中获取列名
-                String byFieldName = sort.getByField();
-                sort.setByField(getColumnNameByOrmClass(TypeUtils.getBaseEntityClass(clazz), byFieldName));
-                condition.sort(sort);
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            }
-            sortField.setAccessible(false);
-        }
+        //3. 增加排序条件
+        addSortToCondition(clazz,params,condition);
+        //增加分页条件
         pageField.setAccessible(true);
         try {
             pageable = condition.page((com.chris.framework.builder.model.PageParams) pageField.get(params));

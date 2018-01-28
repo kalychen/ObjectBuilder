@@ -1,5 +1,7 @@
 package com.chris.framework.builder.model;
 
+import com.chris.framework.builder.core.exception.PageParamsNotFoundException;
+
 /**
  * ChrisFrameworkObjectBuilder
  * com.chris.framework.builder.model
@@ -61,6 +63,9 @@ public class Condition {
      * @return
      */
     public Pageable page(PageParams pageParams) {
+        if (pageParams==null){
+            throw new PageParamsNotFoundException();
+        }
         Pageable pageable = new Pageable(this, pageParams.page, pageParams.pageSize);
         return pageable;
     }
@@ -75,7 +80,7 @@ public class Condition {
     }
 
     public Condition sort(String sortType, String byField) {
-        this.sort = new Sort(sortType, byField);
+        this.sort = new Sort(sortType.toUpperCase(), byField);
         return this;
     }
 
