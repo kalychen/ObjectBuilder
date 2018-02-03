@@ -1,7 +1,6 @@
 package com.chris.framework.builder.core.manager;
 
-import com.chris.framework.builder.annotation.*;
-import com.chris.framework.builder.annotation.PageParams;
+import com.chris.framework.builder.annotation.query.*;
 import com.chris.framework.builder.core.exception.PageParamsNotFoundException;
 import com.chris.framework.builder.model.*;
 import com.chris.framework.builder.utils.*;
@@ -125,7 +124,7 @@ public class QueryManager {
         for (Field field : fields) {
             //如果这个字段被标为@OutField,表示与数据库无关，不需要处理
             if (field.getDeclaredAnnotation(OutField.class) != null
-                    || field.getDeclaredAnnotation(PageParams.class) != null) {
+                    || field.getDeclaredAnnotation(PageParam.class) != null) {
                 continue;
             }
             //获取列名
@@ -531,7 +530,7 @@ public class QueryManager {
         }
         pageField.setAccessible(false);
 
-        //MsgUtils.println(pageable.create());
+        //MsgUtils.println(pageable.persistence());
         PageModel<T> PageModel = QueryManager.query(pageable, (Class<T>) TypeUtils.getBaseEntityClass(clazz));
         return PageModel.expandPage(clazz);
     }

@@ -2,6 +2,7 @@ package com.chris.framework.builder.libs.springboot.repository;
 
 
 import com.chris.framework.builder.model.PageModel;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 
@@ -39,10 +40,13 @@ public class BaseRepositoryImpl<T>
      */
     @Override
     public PageModel<T> getPage(Pageable pageable) {
-        PageModel<T> pageModel = new PageModel<T>(pageable.getPageNumber() + 1, pageable.getPageSize());
-        pageModel.count = count();
+        Page<T> page = findAll(pageable);
+        PageModel<T> pageModel = new PageModel<T>();
         pageModel.hasNext = pageModel.page * pageModel.pageSize < pageModel.count;//是否有下一页
-        pageModel.dataList = findAll(pageable).getContent();
+        pageModel.page = page.getNumber() + 1;
+        pageModel.pageSize = page.getSize();
+        pageModel.count = count();
+        pageModel.dataList = page.getContent();
         return pageModel;
     }
 }

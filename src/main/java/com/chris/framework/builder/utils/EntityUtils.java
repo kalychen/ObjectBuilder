@@ -1,5 +1,7 @@
 package com.chris.framework.builder.utils;
 
+import com.chris.framework.builder.annotation.persistence.UpdateField;
+
 import javax.persistence.Column;
 import java.beans.IntrospectionException;
 import java.beans.PropertyDescriptor;
@@ -23,56 +25,38 @@ import java.util.Set;
 public class EntityUtils {
     /**
      * 复制名称相同类型相同的字段数据
+     * <p>
+     * 功能：把源数据中和目标数据类型中名称相同，类型相匹配的字段名复制给一个新的目标数据类型的实例
+     * 类型匹配：
+     * 1.基本数据类型和包装类自动复制
+     * 2.TimeStamp和Long、long长整型自动转换，忽略时区
      *
-     * @param sourceObj
-     * @param clazz
-     * @param <T1>
-     * @param <T2>
-     * @return
+     * @param sourceObj 源数据对象
+     * @param clazz     目标数据class
+     * @param <T1>      源数据类型
+     * @param <T2>      目标数据类型
+     * @return 复制后的目标数据对象
      */
     public static <T1, T2> T2 copyData(T1 sourceObj, Class<T2> clazz) {
         if (sourceObj == null) {
             return null;
         }
-        //1. 获取源数据的类
-        Class<?> clazz1 = sourceObj.getClass();
         //2. 创建一个目标数据对象
         T2 targetObj = getInstance(clazz);
-        //3. 复制两个对象相同的字段
+        //2. 复制两个对象相同的字段
         copyData(sourceObj, targetObj);
         return targetObj;
     }
 
     /**
-     * 根据字段列表复制字段的值
-     *
-     * @param sourceObj
-     * @param clazz
-     * @param fields
-     * @param <T1>
-     * @param <T2>
-     * @return
-     */
-    public static <T1, T2> T2 copyData(T1 sourceObj, Class<T2> clazz, String[] fields) {
-        //1. 获取源数据的类
-        Class<?> clazz1 = sourceObj.getClass();
-        //2. 创建一个目标数据对象
-        T2 targetObj = getInstance(clazz);
-        //3. 获取两个类字段集合
-        Field[] fields1 = clazz1.getDeclaredFields();
-        Field[] fields2 = clazz.getDeclaredFields();
-        //4. 复制字段
-        copyFieldValue(sourceObj, targetObj, fields, fields1, fields2);
-        return targetObj;
-    }
-
-    /**
      * 复制两个对象中相同字段的值
+     * <p>
+     * 功能：把源数据对象中和目标数据对象名称相同、类型相匹配的字段的值赋值给目标数据对象
      *
-     * @param sourceObj
-     * @param targetObj
-     * @param <T1>
-     * @param <T2>
+     * @param sourceObj 源数据对象
+     * @param targetObj 目标数据对象
+     * @param <T1>      源数据类型
+     * @param <T2>      目标数据类型
      */
     public static <T1, T2> void copyData(T1 sourceObj, T2 targetObj) {
         //1. 获取两个对象的类
@@ -92,13 +76,41 @@ public class EntityUtils {
     }
 
     /**
-     * 根据字段表复制两个对象中相同字段的值
+     * 根据字段列表复制字段的值
+     * <p>
+     * 功能：把源数据对象中与目标数据类型中名称相同且在字段列表中，类型还匹配的字段的值赋值给新创建的目标数据对象
+     * 提示：及时类型匹配、名称相同，但是名称不在字段名列表中的字段是不会复制的
      *
-     * @param sourceObj
-     * @param targetObj
-     * @param fields
-     * @param <T1>
-     * @param <T2>
+     * @param sourceObj 源数据对象
+     * @param clazz     目标数据class
+     * @param fields    需要复制的字段名列表
+     * @param <T1>      源数据类型
+     * @param <T2>      目标数据类型
+     * @return 目标数据对象
+     */
+    public static <T1, T2> T2 copyData(T1 sourceObj, Class<T2> clazz, String[] fields) {
+        //1. 获取源数据的类
+        Class<?> clazz1 = sourceObj.getClass();
+        //2. 创建一个目标数据对象
+        T2 targetObj = getInstance(clazz);
+        //3. 获取两个类字段集合
+        Field[] fields1 = clazz1.getDeclaredFields();
+        Field[] fields2 = clazz.getDeclaredFields();
+        //4. 复制字段
+        copyFieldValue(sourceObj, targetObj, fields, fields1, fields2);
+        return targetObj;
+    }
+
+    /**
+     * 根据字段表复制两个对象中相同字段的值
+     * <p>
+     * 功能：把源数据对象中与目标数据对象中名称相同且在字段列表中，类型还匹配的字段的值赋值给的目标数据对象
+     *
+     * @param sourceObj 源数据对象
+     * @param targetObj 目标数据对象
+     * @param fields    需要复制的字段名称列表
+     * @param <T1>      源数据类型
+     * @param <T2>      目标数据类型
      */
     public static <T1, T2> void copyData(T1 sourceObj, T2 targetObj, String[] fields) {
         //1. 获取源两个对象的类
@@ -113,7 +125,7 @@ public class EntityUtils {
 
     /**
      * 根据字段列表排除复制对象中相同字段的值
-     * 凡是在字段列表中出现的不进行复制
+     * 体质：凡是在字段列表中出现的不进行复制
      *
      * @param sourceObj
      * @param clazz
@@ -137,7 +149,7 @@ public class EntityUtils {
 
     /**
      * 根据字段列表排除复制两个对象中相同字段的值
-     * 凡是在字段列表中出现的不进行复制
+     * 提示：凡是在字段列表中出现的不进行复制
      *
      * @param sourceObj
      * @param targetObj
@@ -158,6 +170,9 @@ public class EntityUtils {
 
     /**
      * 排除字段复制
+     * 内部方法：
+     * 逻辑：比较sourceObj和targetObj两个对象，获取两个对象的字段列表，只要是在fields字段名数组中出现过的字段就不会处理
+     * 否则，机会把名称相同的字段进行复制
      *
      * @param sourceObj
      * @param targetObj
@@ -187,7 +202,38 @@ public class EntityUtils {
     }
 
     /**
+     * 复制更新数据对象
+     * 逻辑：把源数据对象中和目标数据对象同类同名并且有@UpdateField注解的字段复制过去
+     * 本方法的两个对象原则上是同一个数据类型，不过也好似用于部分字段相同的不同数据类型
+     *
+     * @param sourceObj 请求中传递过来的修改数据
+     * @param targetObj 从数据库中查询的修改前数据
+     * @param <T1>
+     * @param <T2>
+     */
+    public static <T1, T2> void copyUpdateObject(T1 sourceObj, T2 targetObj) {
+        //1. 获取源两个对象的类
+        Class<?> clazz1 = sourceObj.getClass();
+        Class<?> clazz2 = targetObj.getClass();
+        //2. 获取两个类字段集合
+        Field[] fields1 = clazz1.getDeclaredFields();
+        Field[] fields2 = clazz2.getDeclaredFields();
+        //3. 遍历
+        for (Field field1 : fields1) {
+            //只有包含@UpdateField注解才进行比较操作
+            if (field1.isAnnotationPresent(UpdateField.class)) {
+                for (Field field2 : fields2) {
+                    //进行名称和类型比较进行复制
+                    copyFieldValue(sourceObj, targetObj, field1, field2);
+                }
+            }
+        }
+    }
+
+    /**
      * 根据字段列表复制两个对象中相同字段的值
+     * 内部方法：
+     * 逻辑：如果两个字段名称相同就会进行复制
      *
      * @param sourceObj
      * @param targetObj
@@ -218,6 +264,10 @@ public class EntityUtils {
 
     /**
      * 复制字段的值
+     * 逻辑：比较两个对象的字段，如果类型相匹配，而且名称相同就会复制字段值
+     * 类型匹配：
+     * 1.基本数据类型和包装类自动复制
+     * 2.TimeStamp和Long、long长整型自动转换，忽略时区
      *
      * @param sourceObj
      * @param targetObj
@@ -256,6 +306,7 @@ public class EntityUtils {
 
     /**
      * 判断TimeStamp和Long\long的匹配关系
+     * 内部方法
      *
      * @param field1
      * @param field2
@@ -278,12 +329,13 @@ public class EntityUtils {
 
     /**
      * 获取一个泛型的实例
+     * 内部方法
      *
      * @param clazz
      * @param <T>
      * @return
      */
-    public static <T> T getInstance(Class<T> clazz) {
+    private static <T> T getInstance(Class<T> clazz) {
         try {
             return clazz.newInstance();
         } catch (InstantiationException e) {
@@ -296,12 +348,13 @@ public class EntityUtils {
 
     /**
      * 判断两个字段的类型是否相同
+     * 内部方法
      *
      * @param field1 复制源
      * @param field2 复制目标
      * @return
      */
-    public static boolean equalFieldsType(Field field1, Field field2) {
+    private static boolean equalFieldsType(Field field1, Field field2) {
         String fTypeName1 = field1.getType().getSimpleName();
         String fTypeName2 = field2.getType().getSimpleName();
         //1. 处理基本数据类型和包装类
@@ -336,11 +389,13 @@ public class EntityUtils {
     }
 
     /**
-     * 把数据库查出来的结果集转换为对应的实体类
+     * 把数据库查出来的结果集转换为目标对象
+     * <p>
+     * 用jdbc查询的结果集，根据持久化注解转换成实体类
      *
      * @param resultSet
-     * @param entity
-     * @param <T>
+     * @param entity    目标对象
+     * @param <T>       目标类
      * @return
      */
     public static <T> T dataToEntity(ResultSet resultSet, T entity) {
@@ -407,6 +462,14 @@ public class EntityUtils {
         return entity;
     }
 
+    /**
+     * 结果接转换为目标类指定的对象
+     *
+     * @param resultSet
+     * @param clazz     目标类
+     * @param <T>
+     * @return
+     */
     public static <T> T dataToEntity(ResultSet resultSet, Class<T> clazz) {
         try {
             T t = clazz.newInstance();

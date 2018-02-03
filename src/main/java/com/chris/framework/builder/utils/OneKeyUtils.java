@@ -2,7 +2,10 @@ package com.chris.framework.builder.utils;
 
 import com.chris.framework.builder.model.OneKeyParams;
 
+import java.io.File;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * YdxApiWebApp
@@ -19,17 +22,33 @@ public class OneKeyUtils {
      * @param params
      */
     public static void onkey(OneKeyParams params) {
-        String tempContent = IoUtils.readTxtFile(params.getTempleteFilePath());//模板文件内容
+        //构建必要参数
+        String rootPath = new File("").getAbsolutePath();//项目根文件夹
+        String srcPath = rootPath + "/src/main/java";//源码文件夹
+        String templeteFilePath = srcPath + "/" + params.getTempletePackage().replace(".", "/") + "/" + params.getTempleteFileName();//模版文件全路径
+        String targetPath = srcPath + "/" + params.getTargetPackage().replace(".", "/");//目标存放全路径
+
+        String tempContent = IoUtils.readTxtFile(templeteFilePath);//读取模板文件内容
         //获取包下的所有类
         List<Class<?>> classList = ClassUtils.getClasses(params.getOrmPackageName());
+        String targetFilePath = null;
+        String targetContent = null;
         for (Class<?> clazz : classList) {
-            String classSimpleName = clazz.getSimpleName().replace("Entity", "");
+            String classSimpleName = clazz.getSimpleName().replace(params.getOrmExt(), "");
 
+            targetFilePath = targetPath + "/" + classSimpleName + params.getTargetFileExt() + ".java";//目标文件全名
+
+            //替换
+            Map<String, String> replaceSchemeMap = params.getReplaceSchemeMap();
+            //添加替换类的
+            replaceSchemeMap.put(params.getClassPlaceHolder(), classSimpleName);
+            Set<String> replaceKeySet = replaceSchemeMap.keySet();
+            targetContent = new String(tempContent);
+            for (String placeHolder : replaceKeySet) {
+                targetContent = targetContent.replace(placeHolder, replaceSchemeMap.get(placeHolder));
+            }
             //放大招
-            IoUtils.writeTxtFile(params.getTargetFilePath() + "/" + classSimpleName + params.getTargetFileExt() + ".java",
-                    tempContent.replace(params.getClassPlaceHolder(), classSimpleName)
-                            .replace(params.getPackagePlaceHolder(), params.getTargetFilePackageName()));
-
+            IoUtils.writeTxtFile(targetFilePath, targetContent);
         }
     }
 }

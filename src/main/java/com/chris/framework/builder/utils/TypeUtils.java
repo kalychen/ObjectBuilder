@@ -1,7 +1,7 @@
 package com.chris.framework.builder.utils;
 
 import com.chris.framework.builder.annotation.Expand;
-import com.chris.framework.builder.annotation.Query;
+import com.chris.framework.builder.annotation.query.Query;
 
 import java.lang.reflect.Field;
 

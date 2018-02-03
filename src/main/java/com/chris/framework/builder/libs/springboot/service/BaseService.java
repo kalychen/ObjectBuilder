@@ -3,6 +3,7 @@ package com.chris.framework.builder.libs.springboot.service;
 
 import com.chris.framework.builder.annotation.Provider;
 import com.chris.framework.builder.libs.springboot.repository.BaseRepository;
+import com.chris.framework.builder.libs.springboot.repository.BaseSpecRepository;
 import com.chris.framework.builder.model.PageModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -19,7 +20,7 @@ import java.util.List;
  * 2017/9/15
  * Explain:封装最基本的Service
  */
-public abstract class BaseService<T, R extends BaseRepository<T>> {
+public abstract class BaseService<T, R extends BaseSpecRepository<T>> {
     @Autowired
     public R dao;
 

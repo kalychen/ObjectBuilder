@@ -1,8 +1,8 @@
 package com.chris.framework.builder.utils;
 
-import com.chris.framework.builder.annotation.Persistence;
-import com.chris.framework.builder.annotation.PersistenceField;
-import com.chris.framework.builder.annotation.SaveMethod;
+import com.chris.framework.builder.annotation.persistence.Persistence;
+import com.chris.framework.builder.annotation.persistence.PersistenceField;
+import com.chris.framework.builder.annotation.persistence.SaveMethod;
 import com.chris.framework.builder.core.manager.ProviderClassObject;
 import com.chris.framework.builder.core.manager.ProviderFactory;
 
