@@ -1,10 +1,11 @@
 package com.chris.framework.builder.libs.springboot.service;
 
 
-import com.chris.framework.builder.annotation.Provider;
 import com.chris.framework.builder.libs.springboot.repository.BaseRepository;
-import com.chris.framework.builder.libs.springboot.repository.BaseSpecRepository;
 import com.chris.framework.builder.model.PageModel;
+import com.chris.framework.builder.utils.EntityUtils;
+import com.chris.framework.builder.utils.JsonUtils;
+import com.chris.framework.builder.utils.MsgUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -20,7 +21,7 @@ import java.util.List;
  * 2017/9/15
  * Explain:封装最基本的Service
  */
-public abstract class BaseService<T, R extends BaseSpecRepository<T>> {
+public abstract class BaseService<T, R extends BaseRepository<T>> {
     @Autowired
     public R dao;
 
@@ -97,6 +98,49 @@ public abstract class BaseService<T, R extends BaseSpecRepository<T>> {
             e.printStackTrace();
         }
         return false;
+    }
+
+    /**
+     * 更新对象
+     *
+     * @param entity
+     * @return
+     */
+    @Transactional
+    public boolean updateEntity(T entity) {
+        try {
+            //1. 获得id字段
+            Field idField = entity.getClass().getDeclaredField("id");
+            //2. 如果没有这个字段，则不进行更新
+            if (idField == null) {
+                return false;
+            }
+            //3. 取得id的值
+            idField.setAccessible(true);
+            Integer id = (Integer) idField.get(entity);
+            idField.setAccessible(false);
+            //4. 如果id为空或者为0，则抛出异常，不进行更新
+            if (id == null || id == 0) {
+                try {
+                    throw new Exception("update entity need id");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            //5. 根据id读取数据库中原来的数据
+            T dataEntity = getOne(id);
+            //6. 执行更新操作
+            EntityUtils.copyUpdateObject(entity, dataEntity);
+            //7. 更新持久化
+            updateOne(dataEntity);
+            return true;
+        } catch (NoSuchFieldException e) {
+            e.printStackTrace();
+            return false;
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     public abstract T getEntity(Integer id);//获取一个对象

@@ -245,7 +245,11 @@ public class ExpandUtils {
         Method method = provider.getMethod();
         //3. 执行
         try {
-            return method.invoke(object, parameterValue);//返回获得的对象
+            if (parameterValue == null) {
+                return method.invoke(object);//返回获得的对象
+            } else {
+                return method.invoke(object, parameterValue);//返回获得的对象
+            }
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         } catch (InvocationTargetException e) {
@@ -306,6 +310,25 @@ public class ExpandUtils {
             e.printStackTrace();
         }
         return null;
+    }
+
+    /**
+     * 获取一个基本数据类型的List
+     * 目前只允许一个参数，可以为空
+     *
+     * @param <T>
+     * @return
+     */
+    public static <T> List<T> getBaseEntityList(Class<T> baseClass, String paramName, Object paramValue) {
+        //构建整体类名
+        String baseObjectListClassName = new StringBuilder(List.class.getName())
+                .append("<")
+                .append(baseClass.getName())
+                .append(">")
+                .toString();
+        //获取集合数据
+        List<T> baseEntityList = (List<T>) getObject(baseObjectListClassName, paramName, paramValue);
+        return baseEntityList;
     }
 
     /**

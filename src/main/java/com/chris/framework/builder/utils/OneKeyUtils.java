@@ -31,6 +31,7 @@ public class OneKeyUtils {
         String tempContent = IoUtils.readTxtFile(templeteFilePath);//读取模板文件内容
         //获取包下的所有类
         List<Class<?>> classList = ClassUtils.getClasses(params.getOrmPackageName());
+        Map<String, String> classTagMap = params.getClassTagMap();
         String targetFilePath = null;
         String targetContent = null;
         for (Class<?> clazz : classList) {
@@ -44,6 +45,12 @@ public class OneKeyUtils {
             replaceSchemeMap.put(params.getClassPlaceHolder(), classSimpleName);
             Set<String> replaceKeySet = replaceSchemeMap.keySet();
             targetContent = new String(tempContent);
+            //替换数据类标记
+            String replacement = classTagMap.get(classSimpleName);
+            if (StringUtils.isEmpty(replacement)) {
+                replacement = classSimpleName;//如果集合中没有对应的标记，就用简短类名来代替
+            }
+            targetContent = targetContent.replace(params.getClassTagPlaceHolder(), replacement);
             for (String placeHolder : replaceKeySet) {
                 targetContent = targetContent.replace(placeHolder, replaceSchemeMap.get(placeHolder));
             }

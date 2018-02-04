@@ -64,10 +64,20 @@ public class ProviderFactory {
             if (returnClassName.equals(List.class.getName())) {
                 returnClassName = provider.getMethod().getGenericReturnType().getTypeName();
             }
+            MsgUtils.println(returnClassName + " -:- " + provider.getParameterType() + " -:- " + provider.getParameter());
 
-            if (targetClassName.equals(returnClassName)
-                    && parameterName.equals(provider.getParameter())) {
-                return provider;
+            if (targetClassName.equals(returnClassName)) {
+                MsgUtils.println("返回类型匹配： " + returnClassName + " : " + targetClassName);
+                // 如果 parameterName为空，则匹配参数名为空的提供者
+                if (StringUtils.isEmpty(parameterName) && StringUtils.isEmpty(provider.getParameter())) {
+                    MsgUtils.println("参数名都为 空： " + provider.getParameter() + " : " + parameterName);
+                    return provider;
+                }
+                // 如果参数名（目前一个参数）相同，则匹配
+                if (parameterName != null && parameterName.equals(provider.getParameter())) {
+                    MsgUtils.println("参数名相同： " + provider.getParameter() + " : " + parameterName);
+                    return provider;
+                }
             }
         }
         return null;
@@ -113,7 +123,7 @@ public class ProviderFactory {
             return null;
         }
         for (ProviderClassObject providerClass : providerClassObjectSet) {
-            String name = providerClass.getProviderClass().getName();
+            String name = providerClass.getProviderClassName();
             if (providerClassName.equals(name)) {
                 return providerClass;
             }

@@ -123,7 +123,8 @@ public class QueryManager {
         Field[] fields = clazz.getDeclaredFields();
         for (Field field : fields) {
             //如果这个字段被标为@OutField,表示与数据库无关，不需要处理
-            if (field.getDeclaredAnnotation(OutField.class) != null
+            if ( field.getDeclaredAnnotation(Exclude.class) != null
+                    ||field.getDeclaredAnnotation(OutField.class) != null
                     || field.getDeclaredAnnotation(PageParam.class) != null) {
                 continue;
             }
@@ -144,6 +145,7 @@ public class QueryManager {
             field.setAccessible(true);
             try {
                 Object obj = field.get(object);
+                MsgUtils.println(field.getName() + " : " + obj);
                 if (obj == null) {
                     continue;
                 }
@@ -455,13 +457,14 @@ public class QueryManager {
 
     /**
      * 给一个查询条件增加排序
-     *
+     * <p>
      * 通过类clazz找到基本数据类型，获取数据库表信息，在构建好的基本查询sql条件后面增加排序条件
-     * @param clazz 返回数据类
-     * @param params 参数体
+     *
+     * @param clazz     返回数据类
+     * @param params    参数体
      * @param condition 查询条件
      */
-    private static void addSortToCondition(Class<?> clazz,Object params,Condition condition){
+    private static void addSortToCondition(Class<?> clazz, Object params, Condition condition) {
         //3. 获取排序数据
         Field sortField = TypeUtils.getFieldByTypeFromObject(params, Sort.class);
         if (sortField != null) {
@@ -491,7 +494,7 @@ public class QueryManager {
         //获取基本数据类型
         Class<?> baseEntityClass = TypeUtils.getBaseEntityClass(clazz);
         Condition condition = buildCondition(params);
-        addSortToCondition(clazz,params,condition);//增加排序条件
+        addSortToCondition(clazz, params, condition);//增加排序条件
         String sql = QueryManager.buildQuery(condition);
         if (baseEntityClass == null) {
             return QueryManager.query(sql, clazz);
@@ -520,7 +523,7 @@ public class QueryManager {
         Pageable pageable = null;
         Condition condition = buildCondition(params);
         //3. 增加排序条件
-        addSortToCondition(clazz,params,condition);
+        addSortToCondition(clazz, params, condition);
         //增加分页条件
         pageField.setAccessible(true);
         try {

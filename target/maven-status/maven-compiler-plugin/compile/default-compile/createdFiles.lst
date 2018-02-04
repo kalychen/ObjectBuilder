@@ -12,6 +12,7 @@ com\chris\framework\builder\annotation\query\Query.class
 com\chris\framework\builder\model\Condition.class
 com\chris\framework\builder\annotation\authority\AuthAdminCheck.class
 com\chris\framework\builder\annotation\ProviderParameter.class
+com\chris\framework\builder\utils\ResultUtils.class
 com\chris\framework\builder\utils\PersistenceUtils.class
 com\chris\framework\builder\net\protocol\NetProtocol.class
 com\chris\framework\builder\annotation\persistence\CreateField.class
@@ -36,6 +37,7 @@ com\chris\framework\builder\core\manager\ProviderObject.class
 com\chris\framework\builder\utils\DevTools.class
 com\chris\framework\builder\utils\DataUtils.class
 com\chris\framework\builder\annotation\persistence\Persistence.class
+com\chris\framework\builder\annotation\query\Exclude.class
 com\chris\framework\builder\core\manager\RegistryCenter.class
 com\chris\framework\builder\annotation\Provider.class
 com\chris\framework\builder\net\protocol\WebRequest.class
@@ -52,6 +54,7 @@ com\chris\framework\builder\model\OneKeyParams.class
 com\chris\framework\builder\model\PageModel.class
 com\chris\framework\builder\annotation\persistence\PersistenceField.class
 com\chris\framework\builder\model\Sort.class
+com\chris\framework\builder\model\QueryParams.class
 com\chris\framework\builder\net\exception\NoAuthorityAccessSwaggerException.class
 com\chris\framework\builder\net\exception\NoAuthorityException.class
 com\chris\framework\builder\annotation\authority\AuthorityCheck.class

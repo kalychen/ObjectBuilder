@@ -8,23 +8,23 @@ package com.chris.framework.builder.core.manager;
  * Explain:提供者类对象
  */
 public class ProviderClassObject {
-    private Class<?> providerClass;//提供者类
+    private String providerClassName;//提供者类
     private Object providerObject;//提供者实例
 
     public ProviderClassObject() {
     }
 
-    public ProviderClassObject(Class<?> providerClass, Object providerObject) {
-        this.providerClass = providerClass;
+    public ProviderClassObject(String providerClassName, Object providerObject) {
+        this.providerClassName = providerClassName;
         this.providerObject = providerObject;
     }
 
-    public Class<?> getProviderClass() {
-        return providerClass;
+    public String getProviderClassName() {
+        return providerClassName;
     }
 
-    public void setProviderClass(Class<?> providerClass) {
-        this.providerClass = providerClass;
+    public void setProviderClassName(String providerClassName) {
+        this.providerClassName = providerClassName;
     }
 
     public Object getProviderObject() {

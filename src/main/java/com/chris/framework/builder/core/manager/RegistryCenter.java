@@ -10,6 +10,7 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
 import java.lang.reflect.Type;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -20,7 +21,7 @@ import java.util.Set;
  * Explain:提供者注册中心
  */
 public class RegistryCenter {
-    private static Set<Object> providerBoxs=new HashSet<>();//这个类应该给个接口
+    private static Set<Object> providerBoxs = new HashSet<>();//这个类应该给个接口
     private static RegistryCenter instance;
 
     public static RegistryCenter init() {
@@ -54,7 +55,12 @@ public class RegistryCenter {
                 Class<?> providerClass = providerObject.getType();
                 /////todo 注册为提供者类
                 if (providerClass != null) {
-                    ProviderFactory.addProviderClass(new ProviderClassObject(providerClass, obj));
+                    //List特殊处理
+                    if (providerClass.getName().equals(List.class.getName())) {
+                        ProviderFactory.addProviderClass(new ProviderClassObject(providerObject.getGenericType().getTypeName(), obj));
+                    } else {
+                        ProviderFactory.addProviderClass(new ProviderClassObject(providerClass.getName(), obj));
+                    }
                 }
                 //获取每个对象的定义类中的方法
                 Method[] methods = providerClass.getMethods();
@@ -82,10 +88,8 @@ public class RegistryCenter {
 
             Object providerObject = provider.getObject();
             Type returnClass = provider.getReturnClass();
-//            if (List.class.getName().equals(returnClass.getName())){
-//            }
             Method method = provider.getMethod();
-            Type[] parameterTypes = provider.getParameterTypes();
+            Type parameterType = provider.getParameterType();
             String parameter = provider.getParameter();
 
             if (providerObject != null) sb.append(providerObject.toString()).append(" ==> ");
@@ -93,15 +97,8 @@ public class RegistryCenter {
             if (method != null) sb.append(method.getName()).append(" ==> ");
 
             //参数列表
-            if (parameterTypes != null) {
-                for (Type paramType : parameterTypes) {
-                    sb.append(paramType.getTypeName());
-                }
-                sb.append(" ==> ");
-            }
-
+            if (parameterType != null) sb.append(parameterType.getTypeName()).append(" ==> ");
             if (parameter != null) sb.append(parameter);
-
             System.out.println(sb.toString());
         }
     }
@@ -112,7 +109,7 @@ public class RegistryCenter {
 
     public void setProviderBox(Object... providerBoxs) {
         for (Object providerBox : providerBoxs) {
-            if (providerBox!=null) {
+            if (providerBox != null) {
                 RegistryCenter.providerBoxs.add(providerBox);
             }
         }
@@ -132,15 +129,21 @@ public class RegistryCenter {
         Class<?>[] parameterTypes = method.getParameterTypes();
         Parameter[] parameters = method.getParameters();//无实际作用
         Parameter parameter = null;
+        Type parameterType = null;
         String parameterName = null;
         if (parameters != null && parameters.length > 0) {
-            parameter = parameters[0];
+            parameter = parameters[0];//只取第一个参数
+            parameterType = parameter.getType();
             parameterName = parameter.getName();
         }
         //3. 获取返回数据类型
-        Class<?> returnType = method.getReturnType();
+        Type returnType = method.getReturnType();
+        //处理List类型
+        if (returnType.getTypeName().equals(List.class.getName())) {
+            returnType = method.getGenericReturnType();
+        }
         //4. 创建ProviderObject
-        ProviderObject provider = new ProviderObject(returnType, method, parameterTypes, parameterName);
+        ProviderObject provider = new ProviderObject(returnType, method, parameterType, parameterName);
         // 获取@Provider注解
         Provider annotation = method.getAnnotation(Provider.class);
         //判断这个注解，如果方法上有该注解，
@@ -148,7 +151,9 @@ public class RegistryCenter {
             //取得参数名 todo 或者是数组
             String parameterName1 = annotation.value();
             if (parameterName1 != null) {
-                provider.setParameter(parameterName1);
+                if (parameters != null && parameters.length > 0) {
+                    provider.setParameter(parameterName1);
+                }
                 return provider;
             }
         }
@@ -161,7 +166,9 @@ public class RegistryCenter {
                 //取得参数名 todo 或者是数组
                 String parameterName1 = annotation1.value();
                 if (parameterName1 != null) {
-                    provider.setParameter(parameterName1);
+                    if (parameters != null && parameters.length > 0) {
+                        provider.setParameter(parameterName1);
+                    }
                     return provider;
                 }
             }
@@ -175,7 +182,9 @@ public class RegistryCenter {
                 //取得参数名 todo 或者是数组
                 String parameterName1 = annotation1.value();
                 if (parameterName1 != null) {
-                    provider.setParameter(parameterName1);
+                    if (parameters != null && parameters.length > 0) {
+                        provider.setParameter(parameterName1);
+                    }
                     return provider;
                 }
             }
@@ -298,7 +307,7 @@ public class RegistryCenter {
 
     public void showProviderClassObjectSet() {
         for (ProviderClassObject providerClassObject : ProviderFactory.getProviderClassObjectSet()) {
-            String simpleName = providerClassObject.getProviderClass().getSimpleName();
+            String simpleName = providerClassObject.getProviderClassName();
             MsgUtils.println(simpleName + " --> " + providerClassObject.getProviderObject());
         }
     }

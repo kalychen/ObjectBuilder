@@ -1,5 +1,6 @@
 package com.chris.framework.builder.model;
 
+import com.chris.framework.builder.utils.MsgUtils;
 import com.chris.framework.builder.utils.OneKeyUtils;
 
 import java.util.HashMap;
@@ -16,6 +17,7 @@ public class OneKeyParams {
     public static final String SERVICE_PACKAGE_PLACEHOLDER = "${SERVICE_PACKAGE_NAME}";//service包名占位符
     public static final String DAO_PACKAGE_PLACEHOLDER = "${DAO_PACKAGE_NAME}";//dao包名占位符
     public static final String CLASS_PLACEHOLDER = "${CLASS_NAME}";//精简类名占位符
+    public static final String CLASS_TAG_PLACEHOLDER = "${CLASS_TAG}";//数据类标记占位符
     public static final String TIME_PLACEHOLDER = "${TIME}";//时间占位符
 
     private String ormPackageName;//用于参照的orm类文件所在的包名
@@ -27,8 +29,10 @@ public class OneKeyParams {
     private String targetPackage;//目标文件存放的包名
     private String targetFileExt;//目标类的后缀
     private String classPlaceHolder;//类型替换占位符
+    private String classTagPlaceHolder;//类型标记替换占位符
 
     private Map<String, String> replaceSchemeMap;//替换方案
+    private Map<String, String> classTagMap;//类标记集合，其实就是单词表，专业点，要符合规范
 
 
     private OneKeyParams() {
@@ -103,12 +107,53 @@ public class OneKeyParams {
         return this;
     }
 
+    public String getClassTagPlaceHolder() {
+        return classTagPlaceHolder;
+    }
+
+    public OneKeyParams setClassTagPlaceHolder(String classTagPlaceHolder) {
+        this.classTagPlaceHolder = classTagPlaceHolder;
+        return this;
+    }
+
     public Map<String, String> getReplaceSchemeMap() {
         return replaceSchemeMap;
     }
 
     public OneKeyParams setReplaceSchemeMap(Map<String, String> replaceSchemeMap) {
         this.replaceSchemeMap = replaceSchemeMap;
+        return this;
+    }
+
+    public Map<String, String> getClassTagMap() {
+        return classTagMap;
+    }
+
+    public OneKeyParams setClassTagMap(Map<String, String> classTagMap) {
+        this.classTagMap = classTagMap;
+        return this;
+    }
+
+    /**
+     * 可以传一个二维数组给类标记map，第二维的第一个元素为数据类名，第二个元素为标记，也就是翻译
+     *
+     * @param classTags
+     * @return
+     */
+    public OneKeyParams setClassTags(String[][] classTags) {
+        if (classTags == null || classTags.length == 0) {
+            return this;
+        }
+        if (classTagMap == null) {
+            classTagMap = new HashMap<>();
+        }
+        for (String[] classTag : classTags) {
+            //如果第二维的长度不是2，就不符合条件，不用处理
+            if (classTag == null || classTag.length != 2) {
+                continue;
+            }
+            classTagMap.put(classTag[0], classTag[1]);
+        }
         return this;
     }
 

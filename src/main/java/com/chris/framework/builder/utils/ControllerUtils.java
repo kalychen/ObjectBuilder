@@ -4,6 +4,7 @@ import com.chris.framework.builder.annotation.Expand;
 import com.chris.framework.builder.model.ParamsItem;
 
 import java.lang.reflect.Field;
+import java.util.List;
 
 /**
  * ChrisFrameworkObjectBuilder
@@ -48,6 +49,70 @@ public class ControllerUtils {
             return ExpandUtils.expand(baseEntity, clazz);
         }
         return null;
+    }
+
+    /**
+     * 获取并且扩展一个集合
+     *
+     * @param clazz
+     * @param params
+     * @param <T>
+     * @return
+     */
+    public static <T> List<T> getList(Class<T> clazz, Object params) {
+        if (clazz == null) {
+            return null;
+        }
+        //构建参数表
+        ParamsItem[] paramsItems = getParamItemsByParamsObject(params);
+        //1. 获取clazz的@Expand注解
+        Expand expandAnno = clazz.getDeclaredAnnotation(Expand.class);
+        //2. 如果没有@Expand这个注解，则将其视为基本数据类型
+        if (expandAnno == null) {
+            ParamsItem paramsItem = paramsItems[0];
+            if (paramsItem != null) {
+                //目前封装的获取基本数据类型都要提供至少一个参数，默认为id
+                return ExpandUtils.getBaseEntityList(clazz, paramsItem.getName(), paramsItem.getValue());
+            }
+        }
+        //3. 否则就执行扩展
+        Class<?> baseEntityClass = expandAnno.baseEntity();
+        if (baseEntityClass == null) {
+            return null;
+        }
+        ParamsItem paramsItem = paramsItems[0];
+        if (paramsItem != null) {
+            List<?> baseEntityList = ExpandUtils.getBaseEntityList(baseEntityClass, paramsItem.getName(), paramsItem.getValue());
+            return ExpandUtils.expandList(baseEntityList, clazz);
+        }
+        return null;
+    }
+
+    /**
+     * 获取并且扩展一个集合，无参数
+     *
+     * @param clazz
+     * @param <T>
+     * @return
+     */
+    public static <T> List<T> getList(Class<T> clazz) {
+        if (clazz == null) {
+            return null;
+        }
+        //1. 获取clazz的@Expand注解
+        Expand expandAnno = clazz.getDeclaredAnnotation(Expand.class);
+        //2. 如果没有@Expand这个注解，则将其视为基本数据类型
+        if (expandAnno == null) {
+            //目前封装的获取基本数据类型都要提供至少一个参数，默认为id
+            return ExpandUtils.getBaseEntityList(clazz, null, null);//provider的默认参数名为id
+        }
+        //3. 否则就执行扩展
+        Class<?> baseEntityClass = expandAnno.baseEntity();
+        if (baseEntityClass == null) {
+            return null;
+        }
+        List<?> baseEntityList = ExpandUtils.getBaseEntityList(baseEntityClass, null, null);
+        return ExpandUtils.expandList(baseEntityList, clazz);
     }
 
     /**

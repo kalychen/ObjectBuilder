@@ -16,24 +16,24 @@ public class ProviderObject {
     private Type returnClass;//提供者返回的数据类型 ps：传类型名需要全名太麻烦，不如传一个class
     private Object object;//包含提供者方法的对象
     private Method method;//提供者方法 这是主体
-    private Type[] parameterTypes;//提供者需要提供的参数类型 目前设置一个 扩展思路：通过参数表匹配相同返回类型的提供者
+    private Type parameterType;//提供者需要提供的参数类型 目前设置一个 扩展思路：通过参数表匹配相同返回类型的提供者
     private String parameter;//提供者需要提供的参数 目前设置一个 扩展思路：通过参数表匹配相同返回类型的提供者
 
     public ProviderObject() {
     }
 
-    public ProviderObject(Type returnClass, Object object, Method method, Type[] parameterType, String parameter) {
+    public ProviderObject(Type returnClass, Object object, Method method, Type parameterType, String parameter) {
         this.returnClass = returnClass;
         this.object = object;
         this.method = method;
-        this.parameterTypes = parameterTypes;
+        this.parameterType = parameterType;
         this.parameter = parameter;
     }
 
-    public ProviderObject(Type returnClass, Method method, Type[] parameterType2, String parameter) {
+    public ProviderObject(Type returnClass, Method method, Type parameterType, String parameter) {
         this.returnClass = returnClass;
         this.method = method;
-        this.parameterTypes = parameterTypes;
+        this.parameterType = parameterType;
         this.parameter = parameter;
     }
 
@@ -62,12 +62,12 @@ public class ProviderObject {
         this.method = method;
     }
 
-    public Type[] getParameterTypes() {
-        return parameterTypes;
+    public Type getParameterType() {
+        return parameterType;
     }
 
-    public void setParameterTypes(Type[] parameterTypes) {
-        this.parameterTypes = parameterTypes;
+    public void setParameterType(Type parameterType) {
+        this.parameterType = parameterType;
     }
 
     public String getParameter() {
@@ -84,7 +84,6 @@ public class ProviderObject {
                 "returnClass=" + returnClass +
                 ", object=" + object +
                 ", method=" + method +
-                ", parameterTypes=" + Arrays.toString(parameterTypes) +
-                '}';
+                ", parameterTypes=" + parameterType;
     }
 }
