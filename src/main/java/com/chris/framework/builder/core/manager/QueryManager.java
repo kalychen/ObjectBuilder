@@ -1,6 +1,7 @@
 package com.chris.framework.builder.core.manager;
 
 import com.chris.framework.builder.annotation.query.*;
+import com.chris.framework.builder.annotation.query.compare.*;
 import com.chris.framework.builder.core.exception.PageParamsNotFoundException;
 import com.chris.framework.builder.model.*;
 import com.chris.framework.builder.utils.*;
@@ -123,15 +124,15 @@ public class QueryManager {
         Field[] fields = clazz.getDeclaredFields();
         for (Field field : fields) {
             //如果这个字段被标为@OutField,表示与数据库无关，不需要处理
-            if ( field.getDeclaredAnnotation(Exclude.class) != null
-                    ||field.getDeclaredAnnotation(OutField.class) != null
+            if (field.getDeclaredAnnotation(Exclude.class) != null
+                    || field.getDeclaredAnnotation(OutField.class) != null
                     || field.getDeclaredAnnotation(PageParam.class) != null) {
                 continue;
             }
             //获取列名
             String columnName = getColumnName(clazz, field);
             //获取字段名
-            String compareSymbol = QueryCompare.EQUAL.getSymbol();
+            String compareSymbol = getDefaultCompareSymbol(field);
             //获取注解
             QueryField queryFieldAnno = field.getDeclaredAnnotation(QueryField.class);
             //如果注解不为空，则从注解取值替代，否则使用默认参数：字段名就是本类的字段名，比较方式就是相等
@@ -145,13 +146,11 @@ public class QueryManager {
             field.setAccessible(true);
             try {
                 Object obj = field.get(object);
-                MsgUtils.println(field.getName() + " : " + obj);
                 if (obj == null) {
                     continue;
                 }
                 String fieldValue = getValueString(field, obj);
                 ////插入判断 如果是数组或者集合，这里要把字段的值转换为数组
-
                 if (obj instanceof Object[]) {
                     fieldValue = getArrayString(obj);
                     //如果没有注解，或者比较符号不符合要求，则默认设置为IN
@@ -162,7 +161,12 @@ public class QueryManager {
                         columnName = getColumnName(clazz, TypeUtils.getFieldByNameFromClass(clazz, field.getName()));
                     } else {
                         //todo 这里需要判断一下有没有相关的注解@QueryField，否则就匹配本字段
-                        columnName = getColumnName(clazz, TypeUtils.getFieldByNameFromClass(clazz, queryFieldAnno.field()));
+                        if (field.isAnnotationPresent(QueryField.class)) {
+                            String fieldName = queryFieldAnno.field();
+                            if (!StringUtils.isEmpty(fieldName)) {
+                                columnName = getColumnName(clazz, TypeUtils.getFieldByNameFromClass(clazz, fieldName));
+                            }
+                        }
                     }
                 }
                 //插入判断 如果是Range或者TimeRange，则符号必然是BETWEEN
@@ -173,14 +177,24 @@ public class QueryManager {
                         compareSymbol = QueryCompare.BETWEEN.getSymbol();
                     }
                 }
+
                 if (!StringUtils.isEmpty(fieldValue)) {
                     //不为空就连接
                     condition.append(" AND ")
                             .append(tableName)
                             .append(".")
-                            .append(columnName)
-                            .append(compareSymbol)
-                            .append(fieldValue);
+                            .append(columnName);
+                    //完善比较符号。如果比较符号中还有占位符，则按照规则替换
+//                    if (!StringUtils.isEmpty(compareSymbol) && !StringUtils.isEmpty(columnName)) {
+                    if (field.isAnnotationPresent(LikeStart.class)
+                            || field.isAnnotationPresent(LikeEnd.class)
+                            || field.isAnnotationPresent(LikeMiddle.class)) {
+
+                        compareSymbol = compareSymbol.replace("${COLUMN_VALUE}", fieldValue);
+                        condition.append(compareSymbol);
+                    } else {
+                        condition.append(compareSymbol).append(fieldValue);
+                    }
                 }
             } catch (IllegalAccessException e) {
                 e.printStackTrace();
@@ -191,6 +205,79 @@ public class QueryManager {
 
         }
         return new Condition(condition).setTableName(tableName);
+    }
+
+    /**
+     * 获得一个字段的默认查询比较符
+     *
+     * @param field
+     * @return
+     */
+    private static String getDefaultCompareSymbol(Field field) {
+        //1. 首先设置默认为相当于
+        String compareSymbol = QueryCompare.EQUAL.getSymbol();
+        //2. 获取字段注解，改变比较符号
+        if (field.isAnnotationPresent(Equals.class)) {
+            compareSymbol = "=";
+        }
+        if (field.isAnnotationPresent(NotEquals.class)) {
+            compareSymbol = " !=";
+        }
+        if (field.isAnnotationPresent(GreaterThan.class)) {
+            compareSymbol = ">";
+        }
+        if (field.isAnnotationPresent(NotGreaterThan.class)) {
+            compareSymbol = "<=";
+        }
+        if (field.isAnnotationPresent(LessThan.class)) {
+            compareSymbol = "<";
+        }
+        if (field.isAnnotationPresent(NotLessThan.class)) {
+            compareSymbol = ">=";
+        }
+        if (field.isAnnotationPresent(In.class)) {
+            compareSymbol = " IN ";
+        }
+        if (field.isAnnotationPresent(NotIn.class)) {
+            compareSymbol = " NOT IN ";
+        }
+        if (field.isAnnotationPresent(Between.class)) {
+            compareSymbol = " BETWEEN ";
+        }
+        if (field.isAnnotationPresent(NotBetween.class)) {
+            compareSymbol = " NOT BETWEEN ";
+        }
+        if (field.isAnnotationPresent(Like.class)) {
+            compareSymbol = " LIKE ";
+        }
+        if (field.isAnnotationPresent(LikeStart.class)) {
+            compareSymbol = " LIKE '${COLUMN_VALUE}%'";//需要修改替换规则
+        }
+        if (field.isAnnotationPresent(LikeEnd.class)) {
+            compareSymbol = " LIKE '%${COLUMN_VALUE}'";
+        }
+        if (field.isAnnotationPresent(Equals.class)) {
+            compareSymbol = " LIKE '%${COLUMN_VALUE}%'";//需要修改替换规则
+        }
+        /*
+        if (field.isAnnotationPresent(OrderByAsc.class)) {
+            compareSymbol = " ORDER BY ${COLUMN_NAME} ASC ";//需要修改替换规则
+        }
+        if (field.isAnnotationPresent(OrderByDesc.class)) {
+            compareSymbol = " ORDER BY ${COLUMN_NAME} DESC ";//需要修改替换规则
+        }
+        if (field.isAnnotationPresent(OrderBy.class)) {
+            OrderBy orderBy = field.getDeclaredAnnotation(OrderBy.class);
+            OrderType value = orderBy.value();
+            if (value != null) {
+                compareSymbol = " ORDER BY ${COLUMN_NAME}" + value.getSymbol();
+            }
+        }
+        if (field.isAnnotationPresent(GroupBy.class)) {
+            compareSymbol = " GROUP BY ${COLUMN_NAME} ";//需要修改替换规则
+        }
+        */
+        return compareSymbol;
     }
 
     /**
@@ -265,6 +352,9 @@ public class QueryManager {
      * @return
      */
     public static String getColumnName(Class<?> clazz, Field field) {
+        if (clazz == null || field == null) {
+            return null;
+        }
         //MsgUtils.println("getColumnName==>className: " + clazz.getCanonicalName() + ",fieldName: " + field.getName());
         //1. 先认为这个字段名就是列名
         String columnName = field.getName();

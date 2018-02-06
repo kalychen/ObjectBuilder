@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.chris.framework.builder.TestMain
 -------------------------------------------------------------------------------
-Tests run: 0, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.001 sec - in com.chris.framework.builder.TestMain
+Tests run: 0, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.008 sec - in com.chris.framework.builder.TestMain
