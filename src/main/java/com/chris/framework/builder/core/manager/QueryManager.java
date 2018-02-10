@@ -375,8 +375,8 @@ public class QueryManager {
             return columnName;
         }
         Class<?> ormClazz = queryAnnotation.value();
-        if (ormClazz == null) {
-            return columnName;
+        if (ormClazz == null || ormClazz == Self.class) {
+            ormClazz = clazz;//如果找到了@Query注解却没有value值或者时默认值Self，则表示自己就是基本数据类
         }
         //7. 拿到字段以及getter和setter方法上面@Column注解的name
         String colName = getColumnNameByOrmClass(ormClazz, columnName);//有可能是注解的值，也有可能就是字段名
