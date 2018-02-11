@@ -402,7 +402,7 @@ public class QueryManager {
         try {
             ormField = ormClazz.getDeclaredField(fieldName);
         } catch (NoSuchFieldException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
             return null;//如果没有找到这个字段就返回空
         }
         if (ormField == null) {

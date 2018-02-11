@@ -124,4 +124,20 @@ public class TypeUtils {
         }
         return null;
     }
+
+    /**
+     * 根据类名获取类
+     *
+     * @param className
+     * @return
+     */
+    public static Class<?> getClassForName(String className) {
+        try {
+            return Class.forName(className);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 }
