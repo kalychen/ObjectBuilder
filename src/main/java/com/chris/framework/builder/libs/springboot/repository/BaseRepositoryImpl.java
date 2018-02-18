@@ -42,11 +42,11 @@ public class BaseRepositoryImpl<T>
     public PageModel<T> getPage(Pageable pageable) {
         Page<T> page = findAll(pageable);
         PageModel<T> pageModel = new PageModel<T>();
-        pageModel.hasNext = pageModel.page * pageModel.pageSize < pageModel.count;//是否有下一页
+        pageModel.count = count();
         pageModel.page = page.getNumber() + 1;
         pageModel.pageSize = page.getSize();
-        pageModel.count = count();
         pageModel.dataList = page.getContent();
+        pageModel.hasNext = pageModel.page * pageModel.pageSize < pageModel.count;//是否有下一页
         return pageModel;
     }
 }

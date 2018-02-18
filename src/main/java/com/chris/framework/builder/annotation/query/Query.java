@@ -1,5 +1,7 @@
 package com.chris.framework.builder.annotation.query;
 
+import com.chris.framework.builder.model.Self;
+
 import java.lang.annotation.*;
 
 /**
@@ -14,5 +16,5 @@ import java.lang.annotation.*;
 @Documented
 @Inherited
 public @interface Query {
-    Class<?> value();//对应数据类型 应该是ORM类
+    Class<?> value() default Self.class;//对应数据类型 应该是ORM类 默认为Self，表示查询参照基本类就是自己
 }

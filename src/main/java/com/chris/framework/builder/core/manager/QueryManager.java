@@ -375,8 +375,8 @@ public class QueryManager {
             return columnName;
         }
         Class<?> ormClazz = queryAnnotation.value();
-        if (ormClazz == null) {
-            return columnName;
+        if (ormClazz == null || ormClazz.getName().equals(Self.class)) {
+            ormClazz = clazz;//如果找到了@Query注解却没有value值或者时默认值Self，则表示自己就是基本数据类
         }
         //7. 拿到字段以及getter和setter方法上面@Column注解的name
         String colName = getColumnNameByOrmClass(ormClazz, columnName);//有可能是注解的值，也有可能就是字段名
@@ -507,12 +507,15 @@ public class QueryManager {
     }
 
     public static <T> PageModel<T> query(Pageable pageable, Class<T> clazz) {
+        if (pageable == null || clazz == null) {
+            return null;
+        }
         //获取条件
         int page = pageable.getPage();
         int pageSize = pageable.getPageSize();
         Condition condition = pageable.getCondition();
         String sql = buildPage(pageable);
-        MsgUtils.println(sql);//打印日志
+        //MsgUtils.println(sql);//打印日志
         javax.persistence.Query nativeQuery = entityManager.createNativeQuery(sql, clazz);
         List<T> resultList = nativeQuery.getResultList();
         long count = count(condition);
@@ -603,7 +606,7 @@ public class QueryManager {
      */
     public static <T> PageModel<T> queryPage(Object params, Class<T> clazz) {
         //1. 先从参数体中找到page数据
-        Field pageField = TypeUtils.getFieldByTypeFromObject(params, com.chris.framework.builder.model.PageParams.class);
+        Field pageField = TypeUtils.getFieldByTypeFromObject(params, PageParams.class);
         //没有分页参数，操作就不执行
         if (pageField == null) {
             //应该抛个异常出来
@@ -617,7 +620,12 @@ public class QueryManager {
         //增加分页条件
         pageField.setAccessible(true);
         try {
-            pageable = condition.page((com.chris.framework.builder.model.PageParams) pageField.get(params));
+            PageParams pageParams = (PageParams) pageField.get(params);
+            if (pageParams != null) {
+                pageable = condition.page(pageParams);
+            } else {
+                pageable = condition.page(new PageParams(1, 10));
+            }
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         }

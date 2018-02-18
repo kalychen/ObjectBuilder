@@ -2,6 +2,7 @@ package com.chris.framework.builder.utils;
 
 import com.chris.framework.builder.annotation.Expand;
 import com.chris.framework.builder.annotation.query.Query;
+import com.chris.framework.builder.model.Self;
 
 import java.lang.reflect.Field;
 
@@ -65,7 +66,12 @@ public class TypeUtils {
         }
         Query queryAnno = clazz.getDeclaredAnnotation(Query.class);
         if (queryAnno != null) {
-            return queryAnno.value();
+            Class<?> baseClass = queryAnno.value();
+            if (baseClass == null || baseClass.getName().equals(Self.class.getName())) {
+                return clazz;
+            }
+            MsgUtils.println("baseClassName: " + baseClass.getName());
+            return baseClass;
         }
         return clazz;
     }
@@ -81,7 +87,9 @@ public class TypeUtils {
         Class<?> objectClass = object.getClass();
         Field[] fields = objectClass.getDeclaredFields();
         for (Field field : fields) {
-            if (fieldClass.getName().equals(field.getType().getName())) {
+            String fieldClassName = fieldClass.getName();
+            String fieldTypeName = field.getType().getName();
+            if (fieldClassName.equals(fieldTypeName)) {
                 return field;
             }
         }

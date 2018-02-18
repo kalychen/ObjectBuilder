@@ -9,7 +9,7 @@ package com.chris.framework.builder.core.exception;
  */
 public class ProviderNotFoundException extends RuntimeException {
     public ProviderNotFoundException() {
-        super("This provider is not found.");
+        this("This provider is not found.");
     }
 
     public ProviderNotFoundException(String message) {

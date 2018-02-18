@@ -3,12 +3,14 @@ package com.chris.framework.builder.libs.springboot.service;
 
 import com.chris.framework.builder.libs.springboot.repository.BaseRepository;
 import com.chris.framework.builder.model.PageModel;
+import com.chris.framework.builder.model.PageParams;
 import com.chris.framework.builder.utils.EntityUtils;
 import com.chris.framework.builder.utils.JsonUtils;
 import com.chris.framework.builder.utils.MsgUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.lang.reflect.Field;
@@ -46,7 +48,17 @@ public abstract class BaseService<T, R extends BaseRepository<T>> {
         //数据库分页查询起始id是从0开始的，请求的页码是从1开始的，所以处理的时候要减一
         return dao.getPage(new PageRequest(page > 0 ? page - 1 : 0, pageSize, new Sort(Sort.Direction.ASC, "id")));
     }
-
+    //4. 查询：数据分页 按照id升序排列
+    //@Provider
+    public PageModel<T> getPage(PageParams pageParams) {
+        if (pageParams==null) {
+            return null;
+        }
+        int page = pageParams.getPage();
+        int pageSize = pageParams.getPageSize();
+        //数据库分页查询起始id是从0开始的，请求的页码是从1开始的，所以处理的时候要减一
+        return dao.getPage(new PageRequest(page > 0 ? page - 1 : 0, pageSize, new Sort(Sort.Direction.ASC, "id")));
+    }
     //4. 增加：增加一条数据
     @Transactional
     public Integer addOne(T t) {

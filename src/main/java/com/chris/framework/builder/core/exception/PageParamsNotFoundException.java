@@ -9,7 +9,7 @@ package com.chris.framework.builder.core.exception;
  */
 public class PageParamsNotFoundException extends RuntimeException {
     public PageParamsNotFoundException() {
-        super("This page parameters is not found.");
+        this("This page parameters is not found.");
     }
 
     public PageParamsNotFoundException(String message) {

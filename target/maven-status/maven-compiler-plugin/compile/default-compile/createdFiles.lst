@@ -54,6 +54,7 @@ com\chris\framework\builder\utils\ClassUtils.class
 com\chris\framework\builder\net\exception\AccountNotFoundException.class
 com\chris\framework\builder\utils\EntityUtils.class
 com\chris\framework\builder\annotation\query\QueryField.class
+com\chris\framework\builder\model\Self.class
 com\chris\framework\builder\annotation\query\PageParam.class
 com\chris\framework\builder\annotation\ImportField.class
 com\chris\framework\builder\annotation\query\OutField.class
@@ -67,6 +68,7 @@ com\chris\framework\builder\net\protocol\NetResult.class
 com\chris\framework\builder\libs\springboot\service\INormalService.class
 com\chris\framework\builder\model\GroupBy.class
 com\chris\framework\builder\model\Range.class
+com\chris\framework\builder\annotation\query\compare\GroupBy.class
 com\chris\framework\builder\annotation\query\compare\LessThan.class
 com\chris\framework\builder\annotation\authority\AppkeyCheck.class
 com\chris\framework\builder\utils\OneKeyUtils.class
