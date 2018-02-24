@@ -1,6 +1,5 @@
 package com.chris.framework.builder.utils;
 
-import javax.tools.JavaFileObject;
 import java.io.*;
 
 /**
@@ -97,5 +96,21 @@ public class IoUtils {
             e.printStackTrace();
         }
         return null;
+    }
+
+    /**
+     * 在一个包下面创建一个文件，并且写入内容
+     *
+     * @param packageName
+     * @param fileName
+     * @param content
+     * @return
+     */
+    public static File createFileInPackage(String packageName, String fileName, String content) {
+        String rootPath = new File("").getAbsolutePath();//项目根文件夹
+        String srcPath = rootPath + "/src/main/java";//源码文件夹
+        String filePath = srcPath + "/" + packageName.replace(".", "/") + "/" + fileName;//文件存放路径
+
+        return writeTxtFile(filePath, content);
     }
 }

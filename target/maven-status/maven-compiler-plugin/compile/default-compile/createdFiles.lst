@@ -25,7 +25,9 @@ com\chris\framework\builder\annotation\query\compare\LikeStart.class
 com\chris\framework\builder\annotation\persistence\Persistence.class
 com\chris\framework\builder\annotation\Provider.class
 com\chris\framework\builder\core\exception\ProviderNotFoundException.class
+com\chris\framework\builder\model\Orm.class
 com\chris\framework\builder\core\manager\ProviderClassObject.class
+com\chris\framework\builder\model\ExcResult.class
 com\chris\framework\builder\annotation\query\QueryCompare.class
 com\chris\framework\builder\annotation\query\compare\Between.class
 com\chris\framework\builder\net\exception\RequestException.class
@@ -36,6 +38,7 @@ com\chris\framework\builder\model\QueryParams.class
 com\chris\framework\builder\net\exception\NoAuthorityAccessSwaggerException.class
 com\chris\framework\builder\annotation\query\compare\Like.class
 com\chris\framework\builder\annotation\query\compare\NotGreaterThan.class
+com\chris\framework\builder\core\exception\BaseClassNotFoundException.class
 com\chris\framework\builder\libs\springboot\repository\BaseSpecRepository.class
 com\chris\framework\builder\annotation\Expand.class
 com\chris\framework\builder\annotation\query\compare\In.class
@@ -79,9 +82,11 @@ com\chris\framework\builder\model\ParamsItem.class
 com\chris\framework\builder\annotation\persistence\SaveMethod.class
 com\chris\framework\builder\annotation\query\QueryImportValue.class
 com\chris\framework\builder\core\manager\ProviderObject.class
+com\chris\framework\builder\model\BuildParams.class
 com\chris\framework\builder\utils\DevTools.class
 com\chris\framework\builder\utils\DataUtils.class
 com\chris\framework\builder\annotation\query\Exclude.class
+com\chris\framework\builder\model\IService.class
 com\chris\framework\builder\core\manager\RegistryCenter.class
 com\chris\framework\builder\net\protocol\WebRequest.class
 com\chris\framework\builder\model\IdParams.class
@@ -102,6 +107,7 @@ com\chris\framework\builder\annotation\query\compare\OrderType.class
 com\chris\framework\builder\libs\springboot\repository\BaseRepository.class
 com\chris\framework\builder\libs\springboot\service\BaseService.class
 com\chris\framework\builder\utils\IoUtils.class
+com\chris\framework\builder\model\MyService.class
 com\chris\framework\builder\utils\ControllerUtils.class
 com\chris\framework\builder\libs\springboot\service\DataProvider.class
 com\chris\framework\builder\core\manager\QueryManager.class

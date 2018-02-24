@@ -20,6 +20,13 @@ public class StringUtils {
         }
         return false;
     }
+
+    /**
+     * 获得小驼峰格式
+     *
+     * @param str
+     * @return
+     */
     public static String getLowerCamel(String str) {
         int i = str.indexOf("_");
         char c = str.charAt(i + 1);
@@ -30,8 +37,46 @@ public class StringUtils {
         return getLowerCamel(str);
     }
 
+    /**
+     * 获得大驼峰格式
+     *
+     * @param str
+     * @return
+     */
+    public static String getUpperCamel(String str) {
+        return upperFirstLetter(getLowerCamel(str));
+    }
+
+    /**
+     * 首字母小写
+     *
+     * @param str
+     * @return
+     */
     public static String lowerFirstLetter(String str) {
         String firstLetter = String.valueOf(str.charAt(0));
         return firstLetter.toLowerCase() + str.substring(1);
+    }
+
+    /**
+     * 首字母大写
+     *
+     * @param str
+     * @return
+     */
+    public static String upperFirstLetter(String str) {
+        String firstLetter = String.valueOf(str.charAt(0));
+        return firstLetter.toUpperCase() + str.substring(1);
+    }
+
+    /**
+     * 根据一个完整的类名称获取简化部分的类型名
+     * 就是从最后一个.后面截取
+     *
+     * @param fullClassName
+     * @return
+     */
+    public static String getSimpleClassNameFromFullClassName(String fullClassName) {
+        return fullClassName.substring(fullClassName.lastIndexOf(".")+1);
     }
 }

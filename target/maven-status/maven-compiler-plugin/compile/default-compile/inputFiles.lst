@@ -2,6 +2,9 @@ E:\WorkSpace\Chris\ChrisObjectBuilder\ObjectBuilder\src\main\java\com\chris\fram
 E:\WorkSpace\Chris\ChrisObjectBuilder\ObjectBuilder\src\main\java\com\chris\framework\builder\annotation\query\compare\GreaterThan.java
 E:\WorkSpace\Chris\ChrisObjectBuilder\ObjectBuilder\src\main\java\com\chris\framework\builder\model\Self.java
 E:\WorkSpace\Chris\ChrisObjectBuilder\ObjectBuilder\src\main\java\com\chris\framework\builder\utils\DataUtils.java
+E:\WorkSpace\Chris\ChrisObjectBuilder\ObjectBuilder\src\main\java\com\chris\framework\builder\utils\DatabaseUtils.java
+E:\WorkSpace\Chris\ChrisObjectBuilder\ObjectBuilder\src\main\java\com\chris\framework\builder\core\exception\BaseClassNotFoundException.java
+E:\WorkSpace\Chris\ChrisObjectBuilder\ObjectBuilder\src\main\java\com\chris\framework\builder\model\Column.java
 E:\WorkSpace\Chris\ChrisObjectBuilder\ObjectBuilder\src\main\java\com\chris\framework\builder\net\protocol\WebRequest.java
 E:\WorkSpace\Chris\ChrisObjectBuilder\ObjectBuilder\src\main\java\com\chris\framework\builder\utils\DevTools.java
 E:\WorkSpace\Chris\ChrisObjectBuilder\ObjectBuilder\src\main\java\com\chris\framework\builder\annotation\query\Cohesion.java
@@ -32,6 +35,7 @@ E:\WorkSpace\Chris\ChrisObjectBuilder\ObjectBuilder\src\main\java\com\chris\fram
 E:\WorkSpace\Chris\ChrisObjectBuilder\ObjectBuilder\src\main\java\com\chris\framework\builder\libs\springboot\repository\BaseRepositoryFactoryBean.java
 E:\WorkSpace\Chris\ChrisObjectBuilder\ObjectBuilder\src\main\java\com\chris\framework\builder\annotation\persistence\UpdateField.java
 E:\WorkSpace\Chris\ChrisObjectBuilder\ObjectBuilder\src\main\java\com\chris\framework\builder\annotation\query\compare\LessThan.java
+E:\WorkSpace\Chris\ChrisObjectBuilder\ObjectBuilder\src\main\java\com\chris\framework\builder\model\MyService.java
 E:\WorkSpace\Chris\ChrisObjectBuilder\ObjectBuilder\src\main\java\com\chris\framework\builder\net\protocol\NetRequest.java
 E:\WorkSpace\Chris\ChrisObjectBuilder\ObjectBuilder\src\main\java\com\chris\framework\builder\net\protocol\WebProtocol.java
 E:\WorkSpace\Chris\ChrisObjectBuilder\ObjectBuilder\src\main\java\com\chris\framework\builder\core\manager\QueryManager.java
@@ -45,6 +49,7 @@ E:\WorkSpace\Chris\ChrisObjectBuilder\ObjectBuilder\src\main\java\com\chris\fram
 E:\WorkSpace\Chris\ChrisObjectBuilder\ObjectBuilder\src\main\java\com\chris\framework\builder\utils\JsonUtils.java
 E:\WorkSpace\Chris\ChrisObjectBuilder\ObjectBuilder\src\main\java\com\chris\framework\builder\annotation\query\compare\OrderByAsc.java
 E:\WorkSpace\Chris\ChrisObjectBuilder\ObjectBuilder\src\main\java\com\chris\framework\builder\model\PageParams.java
+E:\WorkSpace\Chris\ChrisObjectBuilder\ObjectBuilder\src\main\java\com\chris\framework\builder\model\IService.java
 E:\WorkSpace\Chris\ChrisObjectBuilder\ObjectBuilder\src\main\java\com\chris\framework\builder\annotation\query\Exclude.java
 E:\WorkSpace\Chris\ChrisObjectBuilder\ObjectBuilder\src\main\java\com\chris\framework\builder\annotation\ProviderParameter.java
 E:\WorkSpace\Chris\ChrisObjectBuilder\ObjectBuilder\src\main\java\com\chris\framework\builder\annotation\query\QueryImportValue.java
@@ -77,6 +82,7 @@ E:\WorkSpace\Chris\ChrisObjectBuilder\ObjectBuilder\src\main\java\com\chris\fram
 E:\WorkSpace\Chris\ChrisObjectBuilder\ObjectBuilder\src\main\java\com\chris\framework\builder\annotation\Provider.java
 E:\WorkSpace\Chris\ChrisObjectBuilder\ObjectBuilder\src\main\java\com\chris\framework\builder\model\QueryParams.java
 E:\WorkSpace\Chris\ChrisObjectBuilder\ObjectBuilder\src\main\java\com\chris\framework\builder\model\Range.java
+E:\WorkSpace\Chris\ChrisObjectBuilder\ObjectBuilder\src\main\java\com\chris\framework\builder\libs\springboot\controller\BaseBodyFulController.java
 E:\WorkSpace\Chris\ChrisObjectBuilder\ObjectBuilder\src\main\java\com\chris\framework\builder\annotation\query\compare\Equals.java
 E:\WorkSpace\Chris\ChrisObjectBuilder\ObjectBuilder\src\main\java\com\chris\framework\builder\core\manager\ProviderObject.java
 E:\WorkSpace\Chris\ChrisObjectBuilder\ObjectBuilder\src\main\java\com\chris\framework\builder\model\Pageable.java
@@ -85,6 +91,7 @@ E:\WorkSpace\Chris\ChrisObjectBuilder\ObjectBuilder\src\main\java\com\chris\fram
 E:\WorkSpace\Chris\ChrisObjectBuilder\ObjectBuilder\src\main\java\com\chris\framework\builder\annotation\authority\AppkeyCheck.java
 E:\WorkSpace\Chris\ChrisObjectBuilder\ObjectBuilder\src\main\java\com\chris\framework\builder\core\manager\ProviderFactory.java
 E:\WorkSpace\Chris\ChrisObjectBuilder\ObjectBuilder\src\main\java\com\chris\framework\builder\annotation\persistence\Persistence.java
+E:\WorkSpace\Chris\ChrisObjectBuilder\ObjectBuilder\src\main\java\com\chris\framework\builder\libs\springboot\controller\BaseSidFulController.java
 E:\WorkSpace\Chris\ChrisObjectBuilder\ObjectBuilder\src\main\java\com\chris\framework\builder\utils\StringUtils.java
 E:\WorkSpace\Chris\ChrisObjectBuilder\ObjectBuilder\src\main\java\com\chris\framework\builder\model\OneKeyParams.java
 E:\WorkSpace\Chris\ChrisObjectBuilder\ObjectBuilder\src\main\java\com\chris\framework\builder\libs\springboot\service\BaseService.java
@@ -96,4 +103,5 @@ E:\WorkSpace\Chris\ChrisObjectBuilder\ObjectBuilder\src\main\java\com\chris\fram
 E:\WorkSpace\Chris\ChrisObjectBuilder\ObjectBuilder\src\main\java\com\chris\framework\builder\utils\ClassUtils.java
 E:\WorkSpace\Chris\ChrisObjectBuilder\ObjectBuilder\src\main\java\com\chris\framework\builder\libs\springboot\repository\BaseRepositoryImpl.java
 E:\WorkSpace\Chris\ChrisObjectBuilder\ObjectBuilder\src\main\java\com\chris\framework\builder\utils\ResultUtils.java
+E:\WorkSpace\Chris\ChrisObjectBuilder\ObjectBuilder\src\main\java\com\chris\framework\builder\model\ExcResult.java
 E:\WorkSpace\Chris\ChrisObjectBuilder\ObjectBuilder\src\main\java\com\chris\framework\builder\annotation\query\compare\NotBetween.java

@@ -1,6 +1,7 @@
 package com.chris.framework.builder;
 
 import com.chris.framework.builder.utils.MsgUtils;
+import com.chris.framework.builder.utils.StringUtils;
 
 /**
  * ChrisFrameworkObjectBuilder
@@ -12,14 +13,13 @@ import com.chris.framework.builder.utils.MsgUtils;
 public class TestMain {
 
     public static void main(String[] args) {
-        int a = 1;
-        MsgUtils.print(getClassName(a));
+        dbUtilsTest();
     }
 
-    public static boolean isPrimitive(Object o){
-        return o.getClass().isPrimitive();
+    private static void dbUtilsTest() {
+//        MsgUtils.println(StringUtils.getSimpleClassNameFromFullClassName("com.chris.Entity"));
+
     }
-    public static String getClassName(Object o){
-        return o.getClass().getTypeName();
-    }
+
+
 }
