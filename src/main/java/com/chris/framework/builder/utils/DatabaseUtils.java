@@ -421,15 +421,17 @@ public class DatabaseUtils {
     public static String getFieldTypeNameFromColumnClassName(String columnClassName, boolean isParseTimeStamp, Map<String, String> dbTypeMap) {
         if (dbTypeMap == null) {
             dbTypeMap = new HashMap<>();
+            dbTypeMap.put(int.class.getName(), Integer.class.getName());
+            dbTypeMap.put(short.class.getName(), Short.class.getName());
+            dbTypeMap.put(long.class.getName(), Long.class.getName());
+            dbTypeMap.put(float.class.getName(), Float.class.getName());
+            dbTypeMap.put(double.class.getName(), Double.class.getName());
+            dbTypeMap.put(byte.class.getName(), Integer.class.getName());
+            dbTypeMap.put(char.class.getName(), Character.class.getName());
+            dbTypeMap.put(boolean.class.getName(), Integer.class.getName());
+            dbTypeMap.put(Byte.class.getName(), Integer.class.getName());
+            dbTypeMap.put(Boolean.class.getName(), Integer.class.getName());
         }
-        dbTypeMap.put(int.class.getName(), Integer.class.getName());
-        dbTypeMap.put(short.class.getName(), Short.class.getName());
-        dbTypeMap.put(long.class.getName(), Long.class.getName());
-        dbTypeMap.put(float.class.getName(), Float.class.getName());
-        dbTypeMap.put(double.class.getName(), Double.class.getName());
-        dbTypeMap.put(byte.class.getName(), Integer.class.getName());
-        dbTypeMap.put(char.class.getName(), Character.class.getName());
-        dbTypeMap.put(boolean.class.getName(), Boolean.class.getName());
 
         Set<String> keySet = dbTypeMap.keySet();
         if (keySet.contains(columnClassName)) {

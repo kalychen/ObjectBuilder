@@ -4,6 +4,7 @@ import com.chris.framework.builder.annotation.query.Query;
 import com.chris.framework.builder.core.exception.BaseClassNotFoundException;
 import com.chris.framework.builder.core.manager.QueryManager;
 import com.chris.framework.builder.utils.ControllerUtils;
+import com.chris.framework.builder.utils.ExpandUtils;
 
 import java.util.List;
 
@@ -61,24 +62,25 @@ public abstract class MyService implements IService {
     }
 
     @Override
-    public <T> List<T> queryList(QueryParams queryParams) {
+    public <T> List<T> queryList(QueryParams queryParams, Class<T> clazz) {
         Class<? extends QueryParams> queryParamsClass = queryParams.getClass();
         Query annotation = queryParamsClass.getAnnotation(Query.class);
         if (annotation == null) {
             throw new BaseClassNotFoundException();
         }
-        Class<T> baseClass = (Class<T>) annotation.value();
-        return QueryManager.queryList(queryParams, baseClass);
+        Class<?> baseClass = annotation.value();
+        List ts = QueryManager.queryList(queryParams, baseClass);
+        return ExpandUtils.expandList(ts, clazz);
     }
 
     @Override
-    public <T> PageModel<T> queryPage(QueryParams queryParams) {
+    public <T> PageModel<T> queryPage(QueryParams queryParams, Class<T> clazz) {
         Class<? extends QueryParams> queryParamsClass = queryParams.getClass();
         Query annotation = queryParamsClass.getAnnotation(Query.class);
         if (annotation == null) {
             throw new BaseClassNotFoundException();
         }
-        Class<T> baseClass = (Class<T>) annotation.value();
-        return QueryManager.queryPage(queryParams, baseClass);
+        Class<?> baseClass = annotation.value();
+        return QueryManager.queryPage(queryParams, baseClass).expandPage(clazz);
     }
 }

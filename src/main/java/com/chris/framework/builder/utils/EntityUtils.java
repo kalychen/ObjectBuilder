@@ -290,10 +290,10 @@ public class EntityUtils {
                 } else if (timeStampEquals(field1, field2)) {
                     //特殊处理：TimeStamp和Long、longd的自动识别与转换
                     //2-2. 如果源是时间戳，目标是长整型，则取出time数值，赋值
-                    field2.set(targetObj, ((Timestamp) value).getTime());
+                    field2.set(targetObj, value == null ? null : ((Timestamp) value).getTime());
                 } else if (timeStampEquals(field2, field1)) {
                     //2-3. 如果源是长整型，目标是时间戳，则建立TimeStamp对象，赋值
-                    field2.set(targetObj, new Timestamp((Long) value));
+                    field2.set(targetObj, value == null ? null : new Timestamp((Long) value));
                 }
                 //3. 访问权限还原
                 field2.setAccessible(false);

@@ -28,8 +28,8 @@ public interface IService {
 
     <T> PageModel<T> getPage(PageParams pageParams);//获取分页
 
-    <T> List<T> queryList(QueryParams queryParams);//多条件查询集合
+    <T> List<T> queryList(QueryParams queryParams, Class<T> clazz);//多条件查询集合
 
-    <T> PageModel<T> queryPage(QueryParams queryParams);//多条件查询分页
+    <T> PageModel<T> queryPage(QueryParams queryParams, Class<T> clazz);//多条件查询分页
 
 }

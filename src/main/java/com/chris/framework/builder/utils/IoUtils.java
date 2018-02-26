@@ -107,10 +107,27 @@ public class IoUtils {
      * @return
      */
     public static File createFileInPackage(String packageName, String fileName, String content) {
-        String rootPath = new File("").getAbsolutePath();//项目根文件夹
-        String srcPath = rootPath + "/src/main/java";//源码文件夹
-        String filePath = srcPath + "/" + packageName.replace(".", "/") + "/" + fileName;//文件存放路径
-
+        String filePath = packagePath(packageName) + "/" + fileName;//文件存放路径
         return writeTxtFile(filePath, content);
+    }
+
+    /**
+     * 获取源码文件夹
+     *
+     * @return
+     */
+    public static String sourcePath() {
+        String rootPath = new File("").getAbsolutePath();
+        return rootPath + "/src/main/java";//源码文件夹
+    }
+
+    /**
+     * 获取包文件夹
+     *
+     * @param packageName
+     * @return
+     */
+    public static String packagePath(String packageName) {
+        return sourcePath() + "/" + packageName.replace(".", "/");
     }
 }

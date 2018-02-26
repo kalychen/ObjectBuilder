@@ -3,6 +3,8 @@ package com.chris.framework.builder.utils;
 import com.chris.framework.builder.model.OneKeyParams;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.RandomAccessFile;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -57,5 +59,40 @@ public class OneKeyUtils {
             //放大招
             IoUtils.writeTxtFile(targetFilePath, targetContent);
         }
+    }
+
+    /**
+     * 构建ServiceManager文件的主体部分
+     *
+     * @param packageName service类所在的包名
+     * @return
+     */
+    public static String buildSManBody(String packageName) {
+        List<Class<?>> classList = ClassUtils.getClasses(packageName);
+
+        StringBuffer smanBody = new StringBuffer();
+        for (Class<?> clazz : classList) {
+            smanBody.append("    @Autowired\n    public ")
+                    .append(clazz.getSimpleName())
+                    .append(" ")
+                    .append(StringUtils.lowerFirstLetter(clazz.getSimpleName()))
+                    .append(";\n");
+        }
+        return smanBody.toString();
+    }
+
+    /**
+     * 替换文件内容
+     * 逻辑是把文件内容全部读出来，替换相应内容后再写回去
+     *
+     * @param fullFileName
+     * @param oldstr
+     * @param newStr
+     * @return
+     */
+    public static boolean replaceFileContent(String fullFileName, String oldstr, String newStr) {
+        String content = IoUtils.readTxtFile(fullFileName);
+        content = content.replace(oldstr, newStr);
+        return IoUtils.writeTxtFile(fullFileName, content) != null;
     }
 }
