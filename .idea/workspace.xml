@@ -19,8 +19,8 @@
       <list>
         <option value="AnnotationType" />
         <option value="Enum" />
-        <option value="Interface" />
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -44,16 +44,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/com/chris/framework/builder/model/IdParams.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/chris/framework/builder/model/TimeRange.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/chris/framework/builder/annotation/query/Equals.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/chris/framework/builder/annotation/query/compare/Equals.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/chris/framework/builder/annotation/query/compare/GreaterThan.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/chris/framework/builder/annotation/query/compare/LessThan.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/chris/framework/builder/annotation/query/compare/NotLessThan.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/chris/framework/builder/annotation/query/compare/NotGreaterThan.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/chris/framework/builder/annotation/query/compare/In.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/chris/framework/builder/annotation/query/compare/NotIn.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/chris/framework/builder/annotation/query/compare/Not.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/chris/framework/builder/annotation/query/compare/Between.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/chris/framework/builder/annotation/query/compare/NotBetween.java" />
@@ -82,7 +72,6 @@
         <option value="$PROJECT_DIR$/src/main/java/com/chris/framework/builder/model/ExcResult.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/chris/framework/builder/core/exception/BaseClassNotFoundException.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/chris/framework/builder/utils/StringUtils.java" />
-        <option value="$PROJECT_DIR$/src/test/java/com/chris/framework/builder/TestMain.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/chris/framework/builder/utils/TypeUtils.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/chris/framework/builder/model/Orm.java" />
         <option value="$PROJECT_DIR$/lib/javax.persistence.jar!/javax/persistence/Entity.class" />
@@ -90,11 +79,22 @@
         <option value="$PROJECT_DIR$/src/main/java/com/chris/framework/builder/model/Column.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/chris/framework/builder/model/BuildParams.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/chris/framework/builder/utils/IoUtils.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/chris/framework/builder/utils/EntityUtils.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/chris/framework/builder/utils/OneKeyUtils.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/chris/framework/builder/utils/DatabaseUtils.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/chris/framework/builder/model/IService.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/chris/framework/builder/model/MyService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/chris/framework/builder/model/object/ValueObject.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/chris/framework/builder/model/object/ExpandObject.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/chris/framework/builder/model/object/ListItemObject.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/chris/framework/builder/model/object/QueryParams.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/chris/framework/builder/model/object/QueryObject.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/chris/framework/builder/model/object/PushObject.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/chris/framework/builder/model/object/UpdateObject.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/chris/framework/builder/utils/EntityUtils.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/chris/framework/builder/utils/ExpandUtils.java" />
+        <option value="$PROJECT_DIR$/src/test/java/com/chris/framework/builder/TestMain.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/chris/framework/builder/utils/DatabaseUtils.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/chris/framework/builder/libs/springboot/controller/BaseBodyResultFulController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/chris/framework/builder/libs/springboot/controller/BaseBodyResultFulFullController.java" />
       </list>
     </option>
   </component>
@@ -125,6 +125,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -137,75 +138,13 @@
               <item name="ObjectBuilder" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="ObjectBuilder" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ObjectBuilder" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ObjectBuilder" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ObjectBuilder" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ObjectBuilder" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ObjectBuilder" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="builder" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ObjectBuilder" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ObjectBuilder" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="builder" type="462c0819:PsiDirectoryNode" />
-              <item name="springboot" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ObjectBuilder" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ObjectBuilder" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="builder" type="462c0819:PsiDirectoryNode" />
-              <item name="springboot" type="462c0819:PsiDirectoryNode" />
-              <item name="service" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ObjectBuilder" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ObjectBuilder" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ObjectBuilder" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ObjectBuilder" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ObjectBuilder" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ObjectBuilder" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="builder" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scratches" />
-      <pane id="AndroidView" />
       <pane id="PackagesPane" />
-      <pane id="Scope" />
+      <pane id="AndroidView" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -222,11 +161,11 @@
       <recent name="com.chris.framework.builder" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.chris.framework.builder.libs.springboot.controller" />
       <recent name="com.chris.framework.builder.core.exception" />
       <recent name="com.chris.framework.builder.model" />
       <recent name="com.chris.framework.builder.annotation.query.compare" />
       <recent name="com.chris.framework.builder.annotation.query" />
-      <recent name="com.chris.framework.builder.utils" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="E:\WorkSpace\Chris\ChrisObjectBuilder\ObjectBuilder\src\main\java\com\chris\framework\builder\libs\springboot\controller" />
@@ -411,18 +350,22 @@
       <workItem from="1518506944942" duration="197000" />
       <workItem from="1519434652712" duration="194000" />
       <workItem from="1519434954757" duration="25289000" />
-      <workItem from="1519606685766" duration="7083000" />
+      <workItem from="1519606685766" duration="7230000" />
+      <workItem from="1519709259911" duration="692000" />
+      <workItem from="1519713150218" duration="1925000" />
+      <workItem from="1519786203208" duration="14563000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="231965000" />
+    <option name="totallyTimeSpent" value="249292000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -448,7 +391,6 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="DBHelper" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3281075" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="DBOutput" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -467,87 +409,10 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/chris/framework/builder/annotation/query/compare/OrderByAsc.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="261">
-          <caret line="9" column="18" lean-forward="true" selection-start-line="9" selection-start-column="18" selection-end-line="9" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/chris/framework/builder/annotation/query/OrderBy.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="15" column="18" lean-forward="false" selection-start-line="15" selection-start-column="18" selection-end-line="15" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/chris/framework/builder/annotation/query/compare/OrderBy.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="464">
-          <caret line="16" column="55" lean-forward="false" selection-start-line="16" selection-start-column="55" selection-end-line="16" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/chris/framework/builder/annotation/query/compare/OrderByDesc.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="261">
-          <caret line="9" column="18" lean-forward="false" selection-start-line="9" selection-start-column="18" selection-end-line="9" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/chris/framework/builder/annotation/query/compare/OrderType.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="319">
-          <caret line="11" column="16" lean-forward="false" selection-start-line="11" selection-start-column="16" selection-end-line="11" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/chris/framework/builder/annotation/query/QueryCompare.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="290">
-          <caret line="19" column="35" lean-forward="false" selection-start-line="19" selection-start-column="35" selection-end-line="19" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/chris/framework/builder/annotation/query/compare/GroupBy.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="406">
-          <caret line="14" column="10" lean-forward="true" selection-start-line="14" selection-start-column="10" selection-end-line="14" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/chris/framework/builder/libs/springboot/service/INormalService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="261">
-          <caret line="9" column="17" lean-forward="false" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/chris/framework/builder/libs/springboot/service/DataProvider.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="261">
-          <caret line="9" column="17" lean-forward="false" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/chris/framework/builder/model/Self.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="203">
-          <caret line="7" column="17" lean-forward="false" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/chris/framework/builder/annotation/query/Query.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="522">
           <caret line="18" column="78" lean-forward="false" selection-start-line="18" selection-start-column="78" selection-end-line="18" selection-end-column="78" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/chris/framework/builder/libs/springboot/service/BaseService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="551">
-          <caret line="57" column="48" lean-forward="false" selection-start-line="57" selection-start-column="48" selection-end-line="57" selection-end-column="48" />
         </state>
       </provider>
     </entry>
@@ -625,7 +490,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-261">
           <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -657,13 +521,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/chris/framework/builder/model/QueryParams.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="261">
-          <caret line="9" column="17" lean-forward="false" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/chris/framework/builder/model/PageParams.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="261">
@@ -682,28 +539,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="638">
           <caret line="26" column="24" lean-forward="false" selection-start-line="26" selection-start-column="24" selection-end-line="26" selection-end-column="24" />
-          <folding />
         </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="145">
-          <caret line="5" column="0" lean-forward="true" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="MavenHelperPluginDependencyAnalyzer">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/chris/framework/builder/utils/PersistenceUtils.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-6910">
           <caret line="25" column="14" lean-forward="true" selection-start-line="25" selection-start-column="14" selection-end-line="25" selection-end-column="14" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -712,7 +554,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="174">
           <caret line="6" column="12" lean-forward="true" selection-start-line="6" selection-start-column="12" selection-end-line="6" selection-end-column="12" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -730,101 +571,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/chris/framework/builder/utils/ClassUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-4376">
-          <caret line="26" column="7" lean-forward="true" selection-start-line="26" selection-start-column="7" selection-end-line="26" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/chris/framework/builder/utils/StringUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="369">
-          <caret line="72" column="27" lean-forward="false" selection-start-line="72" selection-start-column="27" selection-end-line="72" selection-end-column="27" />
-          <folding>
-            <element signature="e#936#937#0" expanded="false" />
-            <element signature="e#995#996#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/chris/framework/builder/model/Column.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="427">
           <caret line="111" column="35" lean-forward="false" selection-start-line="111" selection-start-column="35" selection-end-line="111" selection-end-column="35" />
-          <folding>
-            <element signature="e#2683#2684#0" expanded="false" />
-            <element signature="e#2736#2737#0" expanded="false" />
-            <element signature="e#2777#2778#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/chris/framework/builder/utils/TypeUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="18" column="6" lean-forward="false" selection-start-line="18" selection-start-column="6" selection-end-line="18" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/chris/framework/builder/TestMain.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="493">
-          <caret line="20" column="0" lean-forward="false" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/chris/framework/builder/utils/ExpandUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3973">
-          <caret line="169" column="6" lean-forward="false" selection-start-line="169" selection-start-column="6" selection-end-line="169" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/chris/framework/builder/utils/EntityUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="451">
-          <caret line="290" column="55" lean-forward="false" selection-start-line="290" selection-start-column="55" selection-end-line="290" selection-end-column="55" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/chris/framework/builder/utils/IoUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="287">
-          <caret line="85" column="23" lean-forward="false" selection-start-line="85" selection-start-column="23" selection-end-line="85" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/chris/framework/builder/utils/OneKeyUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="235">
-          <caret line="84" column="13" lean-forward="false" selection-start-line="84" selection-start-column="13" selection-end-line="84" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/chris/framework/builder/utils/DatabaseUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-4114">
-          <caret line="213" column="46" lean-forward="false" selection-start-line="213" selection-start-column="46" selection-end-line="213" selection-end-column="46" />
-          <folding>
-            <element signature="method#buildeXObjContent#0;class#DatabaseUtils#0" expanded="false" />
-            <marker date="1519614771360" expanded="true" signature="884:898" ph="SELECT * FRO... missingValue" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/chris/framework/builder/model/BuildParams.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="23" column="36" lean-forward="false" selection-start-line="23" selection-start-column="36" selection-end-line="23" selection-end-column="36" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -832,7 +582,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="287">
           <caret line="585" column="30" lean-forward="false" selection-start-line="585" selection-start-column="30" selection-end-line="585" selection-end-column="30" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -840,10 +589,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="398">
           <caret line="77" column="79" lean-forward="true" selection-start-line="77" selection-start-column="79" selection-end-line="77" selection-end-column="79" />
-          <folding>
-            <element signature="e#715#716#0" expanded="true" />
-            <element signature="e#742#743#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -851,6 +596,194 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="432">
           <caret line="25" column="0" lean-forward="false" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/chris/framework/builder/model/object/ValueObject.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="203">
+          <caret line="7" column="17" lean-forward="false" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/chris/framework/builder/model/object/ExpandObject.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="203">
+          <caret line="7" column="20" lean-forward="false" selection-start-line="7" selection-start-column="20" selection-end-line="7" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/chris/framework/builder/model/object/ListItemObject.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="203">
+          <caret line="7" column="19" lean-forward="false" selection-start-line="7" selection-start-column="19" selection-end-line="7" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/chris/framework/builder/model/object/QueryParams.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="203">
+          <caret line="7" column="17" lean-forward="false" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/chris/framework/builder/model/object/QueryObject.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="261">
+          <caret line="9" column="21" lean-forward="false" selection-start-line="9" selection-start-column="21" selection-end-line="9" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/chris/framework/builder/model/object/PushObject.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="232">
+          <caret line="8" column="21" lean-forward="false" selection-start-line="8" selection-start-column="21" selection-end-line="8" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/chris/framework/builder/model/object/UpdateObject.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="319">
+          <caret line="11" column="13" lean-forward="false" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/chris/framework/builder/utils/EntityUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="355">
+          <caret line="202" column="32" lean-forward="false" selection-start-line="202" selection-start-column="32" selection-end-line="202" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_92/src.zip!/java/lang/String.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="432">
+          <caret line="983" column="21" lean-forward="true" selection-start-line="983" selection-start-column="21" selection-end-line="983" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/chris/framework/builder/utils/DevTools.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-355">
+          <caret line="13" column="13" lean-forward="false" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/chris/framework/builder/utils/ClassUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="464">
+          <caret line="26" column="7" lean-forward="true" selection-start-line="26" selection-start-column="7" selection-end-line="26" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/chris/framework/builder/utils/TypeUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2900">
+          <caret line="125" column="5" lean-forward="false" selection-start-line="125" selection-start-column="5" selection-end-line="125" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/chris/framework/builder/utils/ExpandUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="297">
+          <caret line="103" column="21" lean-forward="false" selection-start-line="103" selection-start-column="21" selection-end-line="103" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/chris/framework/builder/TestMain.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="174">
+          <caret line="6" column="31" lean-forward="true" selection-start-line="6" selection-start-column="31" selection-end-line="6" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/chris/framework/builder/utils/OneKeyUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="670">
+          <caret line="84" column="13" lean-forward="false" selection-start-line="84" selection-start-column="13" selection-end-line="84" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/chris/framework/builder/utils/IoUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="519">
+          <caret line="116" column="14" lean-forward="true" selection-start-line="116" selection-start-column="14" selection-end-line="116" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/chris/framework/builder/model/BuildParams.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-679">
+          <caret line="14" column="13" lean-forward="false" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/chris/framework/builder/utils/StringUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="601">
+          <caret line="79" column="21" lean-forward="false" selection-start-line="79" selection-start-column="21" selection-end-line="79" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="435">
+          <caret line="15" column="13" lean-forward="true" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="MavenHelperPluginDependencyAnalyzer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/chris/framework/builder/libs/springboot/service/BaseService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2665">
+          <caret line="26" column="14" lean-forward="false" selection-start-line="26" selection-start-column="14" selection-end-line="26" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/chris/framework/builder/utils/DatabaseUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="177">
+          <caret line="414" column="24" lean-forward="false" selection-start-line="414" selection-start-column="24" selection-end-line="414" selection-end-column="24" />
+          <folding>
+            <marker date="1519797133355" expanded="true" signature="884:898" ph="SELECT * FRO... missingValue" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/chris/framework/builder/libs/springboot/controller/BaseBodyResultFulController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="398">
+          <caret line="40" column="32" lean-forward="false" selection-start-line="40" selection-start-column="32" selection-end-line="40" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/chris/framework/builder/libs/springboot/controller/BaseBodyResultFulFullController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="381">
+          <caret line="30" column="24" lean-forward="true" selection-start-line="30" selection-start-column="24" selection-end-line="30" selection-end-column="24" />
           <folding />
         </state>
       </provider>

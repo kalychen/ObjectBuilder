@@ -43,6 +43,9 @@ public class EntityUtils {
         }
         //2. 创建一个目标数据对象
         T2 targetObj = getInstance(clazz);
+        if (targetObj == null) {
+            return null;
+        }
         //2. 复制两个对象相同的字段
         copyData(sourceObj, targetObj);
         return targetObj;
@@ -93,6 +96,9 @@ public class EntityUtils {
         Class<?> clazz1 = sourceObj.getClass();
         //2. 创建一个目标数据对象
         T2 targetObj = getInstance(clazz);
+        if (targetObj == null) {
+            return null;
+        }
         //3. 获取两个类字段集合
         Field[] fields1 = clazz1.getDeclaredFields();
         Field[] fields2 = clazz.getDeclaredFields();
@@ -139,6 +145,9 @@ public class EntityUtils {
         Class<?> clazz1 = sourceObj.getClass();
         //2. 创建一个目标数据对象
         T2 targetObj = getInstance(clazz);
+        if (targetObj == null) {
+            return null;
+        }
         //3. 获取两个类字段集合
         Field[] fields1 = clazz1.getDeclaredFields();
         Field[] fields2 = clazz.getDeclaredFields();
@@ -339,9 +348,9 @@ public class EntityUtils {
         try {
             return clazz.newInstance();
         } catch (InstantiationException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         } catch (IllegalAccessException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         }
         return null;
     }

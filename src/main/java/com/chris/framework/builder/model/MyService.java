@@ -3,6 +3,7 @@ package com.chris.framework.builder.model;
 import com.chris.framework.builder.annotation.query.Query;
 import com.chris.framework.builder.core.exception.BaseClassNotFoundException;
 import com.chris.framework.builder.core.manager.QueryManager;
+import com.chris.framework.builder.model.object.QueryParams;
 import com.chris.framework.builder.utils.ControllerUtils;
 import com.chris.framework.builder.utils.ExpandUtils;
 

@@ -1,7 +1,6 @@
 package com.chris.framework.builder;
 
 import com.chris.framework.builder.utils.MsgUtils;
-import com.chris.framework.builder.utils.StringUtils;
 
 /**
  * ChrisFrameworkObjectBuilder
@@ -17,7 +16,9 @@ public class TestMain {
     }
 
     private static void dbUtilsTest() {
-//        MsgUtils.println(StringUtils.getSimpleClassNameFromFullClassName("com.chris.Entity"));
+        Byte b = 1;
+        Integer i = Integer.valueOf(String.valueOf(b));
+        MsgUtils.println(i);
 
     }
 

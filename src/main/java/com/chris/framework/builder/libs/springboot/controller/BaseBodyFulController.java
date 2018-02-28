@@ -4,7 +4,7 @@ import com.chris.framework.builder.core.manager.QueryManager;
 import com.chris.framework.builder.libs.springboot.service.BaseService;
 import com.chris.framework.builder.model.PageModel;
 import com.chris.framework.builder.model.PageParams;
-import com.chris.framework.builder.model.QueryParams;
+import com.chris.framework.builder.model.object.QueryParams;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

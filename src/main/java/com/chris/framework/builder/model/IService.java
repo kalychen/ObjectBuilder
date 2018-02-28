@@ -1,5 +1,7 @@
 package com.chris.framework.builder.model;
 
+import com.chris.framework.builder.model.object.QueryParams;
+
 import java.util.List;
 
 /**

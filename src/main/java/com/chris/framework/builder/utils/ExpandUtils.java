@@ -93,7 +93,13 @@ public class ExpandUtils {
                 if (importValueObject != null) {
                     String fieldClassName = fieldClass.getCanonicalName();
                     String importValueObjectClassName = importValueObject.getClass().getCanonicalName();
-                    if (fieldClass.isPrimitive() || fieldClassName.equals(importValueObjectClassName)) {
+//                    String fieldClassName = fieldClass.getName();
+//                    String importValueObjectClassName = importValueObject.getClass().getName();
+
+                    if (TypeUtils.equalsPrimitive(fieldClass)
+                            || fieldClassName.equals(String.class.getName())
+                            || fieldClassName.equals(importValueObjectClassName)) {
+                        //如果字段为基本数据类型或者字符串
                         valueObject = importValueObject;
                     } else {
                         valueObject = expand(importValueObject, fieldClass);

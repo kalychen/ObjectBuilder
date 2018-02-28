@@ -424,13 +424,12 @@ public class DatabaseUtils {
             dbTypeMap.put(int.class.getName(), Integer.class.getName());
             dbTypeMap.put(short.class.getName(), Short.class.getName());
             dbTypeMap.put(long.class.getName(), Long.class.getName());
-            dbTypeMap.put(float.class.getName(), Float.class.getName());
+            dbTypeMap.put(float.class.getName(), Double.class.getName());
             dbTypeMap.put(double.class.getName(), Double.class.getName());
-            dbTypeMap.put(byte.class.getName(), Integer.class.getName());
+            dbTypeMap.put(byte.class.getName(), Byte.class.getName());
             dbTypeMap.put(char.class.getName(), Character.class.getName());
-            dbTypeMap.put(boolean.class.getName(), Integer.class.getName());
-            dbTypeMap.put(Byte.class.getName(), Integer.class.getName());
-            dbTypeMap.put(Boolean.class.getName(), Integer.class.getName());
+            dbTypeMap.put(boolean.class.getName(), Byte.class.getName());
+            dbTypeMap.put(Boolean.class.getName(), Byte.class.getName());
         }
 
         Set<String> keySet = dbTypeMap.keySet();
