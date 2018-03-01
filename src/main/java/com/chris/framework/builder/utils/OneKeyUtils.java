@@ -45,6 +45,7 @@ public class OneKeyUtils {
             Map<String, String> replaceSchemeMap = params.getReplaceSchemeMap();
             //添加替换类的
             replaceSchemeMap.put(params.getClassPlaceHolder(), classSimpleName);
+            replaceSchemeMap.put(StringUtils.getLowerCamel(params.getClassPlaceHolder()), StringUtils.getLowerCamel(classSimpleName));//lowerCamel替换方案
             Set<String> replaceKeySet = replaceSchemeMap.keySet();
             targetContent = new String(tempContent);
             //替换数据类标记

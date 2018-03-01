@@ -2,8 +2,15 @@ package com.chris.framework.builder.utils;
 
 import com.chris.framework.builder.annotation.Expand;
 import com.chris.framework.builder.annotation.ExpandField;
+import com.chris.framework.builder.annotation.query.PageParam;
+import com.chris.framework.builder.annotation.query.Query;
+import com.chris.framework.builder.annotation.query.QueryCompare;
+import com.chris.framework.builder.annotation.query.QueryField;
 import com.chris.framework.builder.model.BuildParams;
 import com.chris.framework.builder.model.Column;
+import com.chris.framework.builder.model.PageParams;
+import com.chris.framework.builder.model.TimeRange;
+import com.chris.framework.builder.model.object.QueryParams;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -374,6 +381,101 @@ public class DatabaseUtils {
     }
 
     /**
+     * 构建多条件查询对象的内容 Qo或者QueryParams
+     *
+     * @param params
+     * @return
+     */
+    public static String buildeQueryObjContent(BuildParams params) {
+        String ormPackageName = params.getOrmPackageName();
+        String ormName = params.getOrmName();
+        String tableName = DatabaseUtils.getTableNameByEntityClassName(ormName);
+        String xPkgName = params.getxPackageName();
+        List<Column> tableColumnList = DatabaseUtils.getTableColumnList(params.getConnection(), tableName);//这里应该扫描entity获取信息
+
+        StringBuffer entityHead = new StringBuffer();//头部，包括包名定义和导入包部分
+        StringBuffer entityHeadNotes = new StringBuffer();//实体类头部注释
+        StringBuffer entityBody = new StringBuffer();//实体类内容
+        String entityName = StringUtils.getSimpleClassNameFromFullClassName(ormName.replace(params.getOrmExt(), ""));
+
+        //构建头部
+        Set<String> entityImportSet = new HashSet<>();
+        entityHead.append("package ").append(xPkgName).append(";\n\n");//包名
+        entityImportSet.add(Query.class.getName());
+        entityImportSet.add(QueryParams.class.getName());
+        entityImportSet.add(QueryField.class.getName());
+        entityImportSet.add(PageParam.class.getName());
+        entityImportSet.add(PageParams.class.getName());
+        entityImportSet.add(QueryCompare.class.getName());
+        entityImportSet.add(ormName);
+
+        //构建头部注释
+        entityHeadNotes.append("/**")
+                .append("\n * App: ")
+                .append(params.getAppName())//应用程序名
+                .append("\n * Pkg: ")
+                .append(params.getxPackageName())//包名
+                .append("\n * Author: ")
+                .append(params.getAuthor())
+                .append("\n * Time: ")
+                .append(params.getTime())
+                .append("\n * Explain: ")
+                .append(entityName + " " + params.getExplain())
+                .append("\n */\n\n");
+
+        //构建定义头部
+        entityBody.append("@Query(").append(StringUtils.getSimpleClassNameFromFullClassName(ormName)).append(".class)\n")//关联表名
+                .append("public class ").append(entityName).append(params.getxClassExt()).append(" implements QueryParams").append(" {\n");
+        //添加public字段
+        String compareSymbol;
+        for (Column column : tableColumnList) {
+            compareSymbol = " QueryCompare.EQUAL ";
+            //判断是否可以添加到查询参数中
+            if (!column.getSearchable()) {
+                continue;
+            }
+            String columnClassName1 = column.getColumnClassName();
+            //判断是否时间戳，如果是，则转换为TimeRange数据类型
+            if (columnClassName1.equals(Timestamp.class.getName())) {
+                columnClassName1 = TimeRange.class.getName();
+                compareSymbol = " QueryCompare.BETWEEN ";
+            }
+            //如果字段类型不是基本数据类型或者包装类，则需要把这个类添加到import
+            String fieldName = StringUtils.getLowerCamel(column.getColumnName());
+            String columnClassName = getFieldTypeNameFromColumnClassName(columnClassName1, params.isParseTimeStamp(), params.getDbTypeMap());
+            Class<?> columnClass = TypeUtils.getClassForName(columnClassName);
+            //如果字段类型不是字符串，也不是基本数据类型以及包装类，就添加import
+            if (!(TypeUtils.equalsPrimitive(columnClass) || String.class.getName().equals(columnClass.getName()))) {
+                entityImportSet.add(columnClassName);
+            }
+            //添加注解行
+            entityBody.append("    @QueryField(field=\"")
+                    .append(fieldName)
+                    .append("\",compare =")
+                    .append(compareSymbol)
+                    .append(")\n");
+            //添加属性行
+            entityBody.append("    public ").append(StringUtils.getSimpleClassNameFromFullClassName(columnClassName)).append(" ").append(fieldName).append(";\n");
+        }
+        //添加分页参数
+        entityBody.append("    @PageParam\n");
+        entityBody.append("    public ").append("PageParams pageParams;\n");
+
+        //添加定义尾部
+        entityBody.append("}");
+
+        for (String ipt : entityImportSet) {
+            entityHead.append("import ").append(ipt).append(";\n");
+        }
+
+        return new StringBuffer(entityHead)
+                .append("\n")
+                .append(entityHeadNotes)
+                .append(entityBody)
+                .toString();
+    }
+
+    /**
      * 创建跟数据库表建立映射关系的实体类
      *
      * @param params
@@ -403,6 +505,22 @@ public class DatabaseUtils {
         for (Class<?> clazz : classList) {
             params.setOrmName(clazz.getName());
             IoUtils.createFileInPackage(params.getxPackageName(), clazz.getSimpleName().replace(params.getOrmExt(), params.getxClassExt()) + ".java", buildeXObjContent(params));
+        }
+    }
+
+    /**
+     * 创建多条件查询数据实体类
+     *
+     * @param params
+     */
+    public static void createQueryObjs(BuildParams params) {
+        Connection connection = params.getConnection();
+        //获取orm累类集合
+        List<Class<?>> classList = ClassUtils.getClasses(params.getOrmPackageName());
+        //遍历，创建扩展实体类
+        for (Class<?> clazz : classList) {
+            params.setOrmName(clazz.getName());
+            IoUtils.createFileInPackage(params.getxPackageName(), clazz.getSimpleName().replace(params.getOrmExt(), params.getxClassExt()) + ".java", buildeQueryObjContent(params));
         }
     }
 
@@ -440,5 +558,25 @@ public class DatabaseUtils {
             return Long.class.getName();
         }
         return columnClassName;//没有找到就不符合条件，当然就用原来的啊
+    }
+
+    /**
+     * 获取创建查询对象的类型转换映射
+     *
+     * @return
+     */
+    private static Map<String, String> getQueryObjTypeMap() {
+        Map<String, String> dbTypeMap = new HashMap<>();
+        dbTypeMap.put(int.class.getName(), Integer.class.getName());
+        dbTypeMap.put(short.class.getName(), Short.class.getName());
+        dbTypeMap.put(long.class.getName(), Long.class.getName());
+        dbTypeMap.put(float.class.getName(), Double.class.getName());
+        dbTypeMap.put(double.class.getName(), Double.class.getName());
+        dbTypeMap.put(byte.class.getName(), Byte.class.getName());
+        dbTypeMap.put(char.class.getName(), Character.class.getName());
+        dbTypeMap.put(boolean.class.getName(), Byte.class.getName());
+        dbTypeMap.put(Boolean.class.getName(), Byte.class.getName());
+
+        return dbTypeMap;
     }
 }
