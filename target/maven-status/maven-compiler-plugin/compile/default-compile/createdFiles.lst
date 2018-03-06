@@ -32,6 +32,7 @@ com\chris\framework\builder\model\Orm.class
 com\chris\framework\builder\core\manager\ProviderClassObject.class
 com\chris\framework\builder\model\ExcResult.class
 com\chris\framework\builder\annotation\query\QueryCompare.class
+com\chris\framework\builder\annotation\authority\NoAuthCheck.class
 com\chris\framework\builder\annotation\query\compare\Between.class
 com\chris\framework\builder\net\exception\RequestException.class
 com\chris\framework\builder\model\OneKeyParams.class

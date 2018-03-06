@@ -55,4 +55,11 @@ public class MsgUtils {
         }
     }
 
+    public static void debug(Object obj) {
+        if (true) {
+            println(obj);
+        }
+    }
+
+
 }
