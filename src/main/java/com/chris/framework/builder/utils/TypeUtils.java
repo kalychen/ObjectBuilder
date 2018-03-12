@@ -4,7 +4,13 @@ import com.chris.framework.builder.annotation.Expand;
 import com.chris.framework.builder.annotation.query.Query;
 import com.chris.framework.builder.model.Self;
 
+import javax.persistence.Column;
+import java.beans.IntrospectionException;
+import java.beans.PropertyDescriptor;
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * ChrisFrameworkObjectBuilder
@@ -140,5 +146,74 @@ public class TypeUtils {
         return null;
     }
 
+    /**
+     * 从一个基本数据类上面获取字段和数据库表列名的map
+     *
+     * @param baseClazz
+     * @return
+     */
+    public static Map<String, com.chris.framework.builder.model.Column> getColumnNameMapFromBaseClass(Class<?> baseClazz) {
+        if (baseClazz == null) {
+            return null;
+        }
+        Map<String, com.chris.framework.builder.model.Column> colnumNameMap = new HashMap<>();
+        //获取所有字段
+        Field[] fields = baseClazz.getDeclaredFields();
+        try {
+            //遍历获取列名
+            for (Field field : fields) {
+                String fieldName = field.getName();
+                String typeName = field.getType().getTypeName();
+                PropertyDescriptor pd = new PropertyDescriptor(fieldName, baseClazz);
+                Method readMethod = pd.getReadMethod();
+                String colName1 = getColumnNameFromMethod(readMethod);
+                //如果从getter方法上面找到了
+                if (!StringUtils.isEmpty(colName1)) {
+                    colnumNameMap.put(fieldName, new com.chris.framework.builder.model.Column(colName1, typeName));
+                } else {
+                    Method writeMethod = pd.getWriteMethod();
+                    String colName2 = getColumnNameFromMethod(writeMethod);
+                    //如果从setter方法上面找到了
+                    if (!StringUtils.isEmpty(colName2)) {
+                        colnumNameMap.put(fieldName, new com.chris.framework.builder.model.Column(colName2, typeName));
+                    } else {
+                        //获取
+                        //如果getter和setter上面都没有，就取字段上面的拿到字段注解 todo 错了应该是拿到字段注解或者getter注解
+                        Column column = field.getDeclaredAnnotation(Column.class);
+                        if (column != null) {
+                            String colName = column.name();
+                            if (colName != null) {
+                                colnumNameMap.put(fieldName, new com.chris.framework.builder.model.Column(colName, typeName));
+                            }
+                        }
+                    }
+                }
+            }
+        } catch (IntrospectionException e) {
+            e.printStackTrace();
+        }
+        return colnumNameMap;
+    }
+
+    /**
+     * 从一个基本数据类的方法上面获取数据库表的列名
+     * 方法要带有@Colmun注解
+     *
+     * @param method
+     * @return
+     */
+    private static String getColumnNameFromMethod(Method method) {
+        //MsgUtils.println("getColName2==>methodName: " + method.getName());
+        if (method != null) {
+            Column annotation = method.getDeclaredAnnotation(Column.class);
+            if (annotation != null) {
+                String colName = annotation.name();
+                if (!StringUtils.isEmpty(colName)) {
+                    return colName;
+                }
+            }
+        }
+        return null;
+    }
 
 }

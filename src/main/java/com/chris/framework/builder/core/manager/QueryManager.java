@@ -56,6 +56,67 @@ public class QueryManager {
     }
 
     /**
+     * 构建查询条件语句(取部分字段 todo 临时)
+     *
+     * @param condition
+     * @return
+     */
+    public static String buildQuery(Condition condition, String... fieldNames) {
+        if (condition == null) {
+            return null;
+        }
+        Class<?> baseClass = condition.getaClass();
+        if (baseClass == null || fieldNames == null || fieldNames.length == 0) {
+            return buildQuery(condition);
+        }
+        //1. 先构建个简单的，用*
+        StringBuilder sql = new StringBuilder("SELECT ");
+        for (String fieldName : fieldNames) {
+            sql.append(getColumnNameByOrmClass(baseClass, fieldName)).append(",");
+        }
+        sql.deleteCharAt(sql.lastIndexOf(","));
+        sql.append(" FROM ").append(condition.getTableName());
+        //3. 获取条件
+        String listSql = condition.createSql();
+        if (!StringUtils.isEmpty(listSql)) {
+            sql.append(" WHERE ").append(listSql);
+        }
+        MsgUtils.println(sql);
+        return sql.toString();
+    }
+
+    /**
+     * 构建一个查询分页的字符串(部分字段)
+     *
+     * @param pageable
+     * @return
+     */
+    public static String buildPage(Pageable pageable, String... fieldNames) {
+        if (pageable == null) {
+            return null;
+        }
+        Condition condition = pageable.getCondition();
+        Class<?> baseClass = condition.getaClass();
+        if (baseClass == null || fieldNames == null || fieldNames.length == 0) {
+            return buildQuery(condition);
+        }
+        //1. 先构建个简单的，用*
+        StringBuilder sql = new StringBuilder("SELECT ");
+        for (String fieldName : fieldNames) {
+            sql.append(getColumnNameByOrmClass(baseClass, fieldName)).append(",");
+        }
+        sql.deleteCharAt(sql.lastIndexOf(","));
+        sql.append(" FROM ").append(condition.getTableName());
+        //3. 获取条件
+        String pageSql = pageable.create();
+        if (!StringUtils.isEmpty(pageSql)) {
+            sql.append(" WHERE ").append(pageSql);
+        }
+        MsgUtils.println(sql);
+        return sql.toString();
+    }
+
+    /**
      * 构建一个查询分页的字符串
      *
      * @param pageable
@@ -204,7 +265,7 @@ public class QueryManager {
             }
 
         }
-        return new Condition(condition).setTableName(tableName);
+        return new Condition(TypeUtils.getBaseEntityClass(clazz), condition).setTableName(tableName);
     }
 
     /**
@@ -332,11 +393,13 @@ public class QueryManager {
     public static String getTableName(Class<?> clazz) {
         //1. 获取本类注解
         Query queryAnnotation = clazz.getDeclaredAnnotation(Query.class);
-        if (queryAnnotation == null) {
-            return null;
+        Class<?> baseClass = null;
+        if (queryAnnotation != null) {
+            baseClass = queryAnnotation.value();
+        } else {
+            baseClass = clazz;
         }
         //2. 获取ORM类的注解
-        Class<?> baseClass = queryAnnotation.value();
         Entity entityAnnotation = baseClass.getDeclaredAnnotation(Entity.class);
         if (entityAnnotation == null) {
             return null;

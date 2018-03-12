@@ -6,13 +6,13 @@
 
     <groupId>com.chris</groupId>
     <artifactId>chris-framework-object-builder</artifactId>
-    <version>1.0.2</version>
+    <version>1.0.3</version>
 
     <!--支持SpringBoot-->
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-dependencies</artifactId>
-        <version>1.5.8.RELEASE</version>
+        <version>1.5.10.RELEASE</version>
     </parent>
 
     <build>
@@ -32,7 +32,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
-        <spring.framework.version>1.5.8.RELEASE</spring.framework.version>
+        <spring.framework.version>1.5.10.RELEASE</spring.framework.version>
     </properties>
 
     <dependencies>
@@ -68,7 +68,5 @@
             <version>2.7.0</version>
         </dependency>
     </dependencies>
-
-
 
 </project>

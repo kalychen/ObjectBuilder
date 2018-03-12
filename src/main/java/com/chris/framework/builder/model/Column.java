@@ -21,6 +21,14 @@ public class Column {
     private String pkColumnName;//外键关联列名
     private boolean isPrimaryKey;//是否主键
 
+    public Column() {
+    }
+
+    public Column(String columnName, String columnClassName) {
+        this.columnName = columnName;
+        this.columnClassName = columnClassName;
+    }
+
     public int getColumnId() {
         return columnId;
     }
