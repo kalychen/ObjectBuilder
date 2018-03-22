@@ -30,6 +30,7 @@ com\chris\framework\builder\model\object\QueryObject.class
 com\chris\framework\builder\core\exception\ProviderNotFoundException.class
 com\chris\framework\builder\model\Orm.class
 com\chris\framework\builder\core\manager\ProviderClassObject.class
+com\chris\framework\builder\libs\springboot\controller\BaseBodySwaggerController.class
 com\chris\framework\builder\model\ExcResult.class
 com\chris\framework\builder\annotation\query\QueryCompare.class
 com\chris\framework\builder\annotation\authority\NoAuthCheck.class
