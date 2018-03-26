@@ -21,6 +21,7 @@ com\chris\framework\builder\annotation\query\QueryImport.class
 com\chris\framework\builder\annotation\query\compare\Equals.class
 com\chris\framework\builder\annotation\query\compare\LikeEnd.class
 com\chris\framework\builder\model\object\ListItemObject.class
+com\chris\framework\builder\utils\ContentCachingRequestWrapper.class
 com\chris\framework\builder\annotation\query\compare\OrderBy.class
 com\chris\framework\builder\libs\springboot\repository\BaseRepositoryFactoryBean$BaseRepositoryFactory.class
 com\chris\framework\builder\annotation\query\compare\LikeStart.class
@@ -64,6 +65,7 @@ com\chris\framework\builder\utils\JsonUtils.class
 com\chris\framework\builder\model\object\QueryParams.class
 com\chris\framework\builder\model\Column.class
 com\chris\framework\builder\core\exception\PageParamsNotFoundException.class
+com\chris\framework\builder\utils\ContentCachingRequestWrapper$RequestCachingInputStream.class
 com\chris\framework\builder\utils\ClassUtils.class
 com\chris\framework\builder\net\exception\AccountNotFoundException.class
 com\chris\framework\builder\utils\EntityUtils.class
