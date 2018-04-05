@@ -7,10 +7,7 @@
     <groupId>com.chris</groupId>
     <artifactId>chris-framework-object-builder</artifactId>
     <version>1.0.4</version>
-<<<<<<< HEAD
     <packaging>jar</packaging>
-=======
->>>>>>> 33c199d298c8b18552f797c59c95ab9bf5c2e8d2
 
     <!--支持SpringBoot-->
     <parent>
@@ -78,24 +75,4 @@
             <version>2.7.0</version>
         </dependency>
     </dependencies>
-
-<<<<<<< HEAD
-    <!-- 项目部署到私服配置 -->
-    <distributionManagement> <!-- 远程部署管理信息 -->
-        <repository> <!--部署项目产生的构件到远程仓库需要的信息 -->
-            <id>releases</id>
-            <name>Nexus Release Repository</name>
-            <url>http://192.168.1.108:8081/repository/maven-releases/</url>
-        </repository>
-
-        <snapshotRepository> <!-- 如果没有配置该元素，默认部署到repository元素配置的仓库 -->
-            <id>snapshots</id>
-            <name>Nexus Snapshot Repository</name>
-            <url>http://192.168.1.108:8081/repository/maven-snapshots/</url>
-        </snapshotRepository>
-    </distributionManagement>
-
-
-=======
->>>>>>> 33c199d298c8b18552f797c59c95ab9bf5c2e8d2
 </project>
