@@ -1,6 +1,5 @@
 package com.chris.framework.builder.model;
 
-import com.chris.framework.builder.utils.MsgUtils;
 import com.chris.framework.builder.utils.OneKeyUtils;
 
 import java.util.HashMap;
@@ -152,7 +151,7 @@ public class OneKeyParams {
             if (classTag == null || classTag.length != 2) {
                 continue;
             }
-            classTagMap.put(classTag[0], classTag[1]);
+            classTagMap.put(classTag[0].toLowerCase().trim(), classTag[1]);
         }
         return this;
     }

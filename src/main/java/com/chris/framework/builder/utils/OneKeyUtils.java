@@ -46,7 +46,7 @@ public class OneKeyUtils {
             Set<String> replaceKeySet = replaceSchemeMap.keySet();
             targetContent = new String(tempContent);
             //替换数据类标记
-            String replacement = classTagMap.get(classSimpleName.toLowerCase());
+            String replacement = classTagMap.get(classSimpleName.toLowerCase().trim());
             if (StringUtils.isEmpty(replacement)) {
                 replacement = classSimpleName;//如果集合中没有对应的标记，就用简短类名来代替
             }

@@ -408,12 +408,13 @@ public class EntityUtils {
             ResultSetMetaData resultSetMetaData = resultSet.getMetaData();
             rowData = new HashMap();
             for (int j = 1; j <= resultSetMetaData.getColumnCount(); j++) {
-                rowData.put(resultSetMetaData.getColumnName(j), resultSet.getObject(j));
+                rowData.put(resultSetMetaData.getColumnLabel(j), resultSet.getObject(j));
             }
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
         }
+        MsgUtils.println(JsonUtils.toJson(rowData.keySet()));
         //2. 获取entity的类
         Class<?> entityClass = entity.getClass();
         //3. 获取字段
@@ -427,34 +428,33 @@ public class EntityUtils {
                 try {
                     //找到这个字段的getter方法
                     pd = new PropertyDescriptor(field.getName(), entityClass);
-                    if (pd == null) {
-                        continue;
-                    }
-                    Method readMethod = pd.getReadMethod();
-                    if (readMethod == null) {
-                        continue;
-                    }
-                    //获取getter方法上面的@Column
-                    columnAnno = readMethod.getDeclaredAnnotation(Column.class);
-                    if (columnAnno == null) {
-                        continue;
+                    if (pd != null) {
+                        Method readMethod = pd.getReadMethod();
+                        if (readMethod != null) {
+                            //获取getter方法上面的@Column
+                            columnAnno = readMethod.getDeclaredAnnotation(Column.class);
+                        }
                     }
                 } catch (IntrospectionException e) {
                 }
-
             }
             //6. 获取数据库表中的列名
-            String colName = columnAnno.name();
+            String colName = null;
+            if (columnAnno != null) {
+                colName = columnAnno.name();
+            }
             if (StringUtils.isEmpty(colName)) {
-                continue;
+                colName = field.getName();
             }
             //7. 获取map中的value
             Object value = rowData.get(colName);
             //8. 给字段赋值
             try {
-                field.setAccessible(true);
-                field.set(entity, value);
-                field.setAccessible(false);
+                if (value != null) {
+                    field.setAccessible(true);
+                    field.set(entity, value);
+                    field.setAccessible(false);
+                }
             } catch (IllegalAccessException e) {
                 continue;
             }

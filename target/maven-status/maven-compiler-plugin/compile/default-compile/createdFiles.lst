@@ -46,9 +46,11 @@ com\chris\framework\builder\annotation\query\compare\LikeMiddle.class
 com\chris\framework\builder\annotation\query\OrderBy.class
 com\chris\framework\builder\utils\MsgUtils.class
 com\chris\framework\builder\annotation\ProviderBox.class
+com\chris\framework\builder\libs\springboot\controller\BaseBodyFulController.class
 com\chris\framework\builder\annotation\query\compare\OrderByAsc.class
 com\chris\framework\builder\utils\ClassUtils$1.class
 com\chris\framework\builder\utils\JsonUtils.class
+com\chris\framework\builder\model\Column.class
 com\chris\framework\builder\core\exception\PageParamsNotFoundException.class
 com\chris\framework\builder\utils\ClassUtils.class
 com\chris\framework\builder\net\exception\AccountNotFoundException.class
@@ -56,6 +58,7 @@ com\chris\framework\builder\utils\EntityUtils.class
 com\chris\framework\builder\annotation\query\QueryField.class
 com\chris\framework\builder\model\Self.class
 com\chris\framework\builder\annotation\query\PageParam.class
+com\chris\framework\builder\libs\springboot\controller\BaseSidFulController.class
 com\chris\framework\builder\annotation\ImportField.class
 com\chris\framework\builder\annotation\query\OutField.class
 com\chris\framework\builder\model\Condition.class
@@ -93,6 +96,7 @@ com\chris\framework\builder\annotation\authority\AuthorityCheck.class
 com\chris\framework\builder\utils\StringUtils.class
 com\chris\framework\builder\model\PageParams.class
 com\chris\framework\builder\model\Pageable.class
+com\chris\framework\builder\utils\DatabaseUtils.class
 com\chris\framework\builder\annotation\query\Cohesion.class
 com\chris\framework\builder\annotation\query\compare\OrderType.class
 com\chris\framework\builder\libs\springboot\repository\BaseRepository.class
