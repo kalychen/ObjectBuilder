@@ -12,14 +12,15 @@ import com.chris.framework.builder.utils.MsgUtils;
 public class TestMain {
 
     public static void main(String[] args) {
-        int a = 1;
-        MsgUtils.print(getClassName(a));
+        dbUtilsTest();
     }
 
-    public static boolean isPrimitive(Object o){
-        return o.getClass().isPrimitive();
+    private static void dbUtilsTest() {
+        Byte b = 1;
+        Integer i = Integer.valueOf(String.valueOf(b));
+        MsgUtils.println(i);
+
     }
-    public static String getClassName(Object o){
-        return o.getClass().getTypeName();
-    }
+
+
 }

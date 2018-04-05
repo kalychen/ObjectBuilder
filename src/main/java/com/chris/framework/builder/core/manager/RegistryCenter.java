@@ -314,11 +314,13 @@ public class RegistryCenter {
 
     public RegistryCenter setEntityManager(EntityManager entityManager) {
         QueryManager.init(entityManager);
+        Chris.setEntityManager(entityManager);
         return this;
     }
 
     public RegistryCenter setJdbcTemplete(JdbcTemplate jdbcTemplete) {
         JdbcManager.init(jdbcTemplete);
+        Chris.setJdbcTemplate(jdbcTemplete);
         return this;
     }
 }

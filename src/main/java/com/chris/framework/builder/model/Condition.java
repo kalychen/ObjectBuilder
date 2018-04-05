@@ -10,6 +10,7 @@ import com.chris.framework.builder.core.exception.PageParamsNotFoundException;
  * Explain:查询条件
  */
 public class Condition {
+    private Class<?> aClass;
     private String tableName;
     private StringBuilder sql;
     private Sort sort;//这个排序有待进一步处理
@@ -21,7 +22,25 @@ public class Condition {
         this.sql = sql;
     }
 
+    public Condition(Class<?> aClass, StringBuilder sql) {
+        this.aClass = aClass;
+        this.sql = sql;
+    }
+
     public Condition(StringBuilder sql, Sort sort) {
+        this.sql = sql;
+        this.sort = sort;
+    }
+
+    public Condition(Class<?> aClass, StringBuilder sql, Sort sort) {
+        this.aClass = aClass;
+        this.sql = sql;
+        this.sort = sort;
+    }
+
+    public Condition(Class<?> aClass, String tableName, StringBuilder sql, Sort sort) {
+        this.aClass = aClass;
+        this.tableName = tableName;
         this.sql = sql;
         this.sort = sort;
     }
@@ -63,7 +82,7 @@ public class Condition {
      * @return
      */
     public Pageable page(PageParams pageParams) {
-        if (pageParams==null){
+        if (pageParams == null) {
             throw new PageParamsNotFoundException();
         }
         Pageable pageable = new Pageable(this, pageParams.page, pageParams.pageSize);
@@ -86,6 +105,15 @@ public class Condition {
 
     public Condition sort(String sortType) {
         this.sort = new Sort(sortType, "id");
+        return this;
+    }
+
+    public Class<?> getaClass() {
+        return aClass;
+    }
+
+    public Condition setaClass(Class<?> aClass) {
+        this.aClass = aClass;
         return this;
     }
 

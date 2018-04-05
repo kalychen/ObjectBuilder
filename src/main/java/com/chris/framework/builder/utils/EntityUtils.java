@@ -43,6 +43,9 @@ public class EntityUtils {
         }
         //2. 创建一个目标数据对象
         T2 targetObj = getInstance(clazz);
+        if (targetObj == null) {
+            return null;
+        }
         //2. 复制两个对象相同的字段
         copyData(sourceObj, targetObj);
         return targetObj;
@@ -93,6 +96,9 @@ public class EntityUtils {
         Class<?> clazz1 = sourceObj.getClass();
         //2. 创建一个目标数据对象
         T2 targetObj = getInstance(clazz);
+        if (targetObj == null) {
+            return null;
+        }
         //3. 获取两个类字段集合
         Field[] fields1 = clazz1.getDeclaredFields();
         Field[] fields2 = clazz.getDeclaredFields();
@@ -139,6 +145,9 @@ public class EntityUtils {
         Class<?> clazz1 = sourceObj.getClass();
         //2. 创建一个目标数据对象
         T2 targetObj = getInstance(clazz);
+        if (targetObj == null) {
+            return null;
+        }
         //3. 获取两个类字段集合
         Field[] fields1 = clazz1.getDeclaredFields();
         Field[] fields2 = clazz.getDeclaredFields();
@@ -290,10 +299,10 @@ public class EntityUtils {
                 } else if (timeStampEquals(field1, field2)) {
                     //特殊处理：TimeStamp和Long、longd的自动识别与转换
                     //2-2. 如果源是时间戳，目标是长整型，则取出time数值，赋值
-                    field2.set(targetObj, ((Timestamp) value).getTime());
+                    field2.set(targetObj, value == null ? null : ((Timestamp) value).getTime());
                 } else if (timeStampEquals(field2, field1)) {
                     //2-3. 如果源是长整型，目标是时间戳，则建立TimeStamp对象，赋值
-                    field2.set(targetObj, new Timestamp((Long) value));
+                    field2.set(targetObj, value == null ? null : new Timestamp((Long) value));
                 }
                 //3. 访问权限还原
                 field2.setAccessible(false);
@@ -339,9 +348,9 @@ public class EntityUtils {
         try {
             return clazz.newInstance();
         } catch (InstantiationException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         } catch (IllegalAccessException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         }
         return null;
     }

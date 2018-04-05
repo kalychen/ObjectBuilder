@@ -19,6 +19,15 @@ public class Column {
     private Boolean isCaseSensitive;//是否支持区分大小写
     private String pkTableName;//外键关联表名
     private String pkColumnName;//外键关联列名
+    private boolean isPrimaryKey;//是否主键
+
+    public Column() {
+    }
+
+    public Column(String columnName, String columnClassName) {
+        this.columnName = columnName;
+        this.columnClassName = columnClassName;
+    }
 
     public int getColumnId() {
         return columnId;
@@ -106,5 +115,13 @@ public class Column {
 
     public void setPkColumnName(String pkColumnName) {
         this.pkColumnName = pkColumnName;
+    }
+
+    public boolean isPrimaryKey() {
+        return isPrimaryKey;
+    }
+
+    public void setPrimaryKey(boolean primaryKey) {
+        isPrimaryKey = primaryKey;
     }
 }
