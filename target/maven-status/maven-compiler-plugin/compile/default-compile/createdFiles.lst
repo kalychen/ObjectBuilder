@@ -1,4 +1,5 @@
 com\chris\framework\builder\core\manager\ProviderFactory.class
+com\chris\framework\builder\annotation\ChrisMapper.class
 com\chris\framework\builder\annotation\persistence\CuField.class
 com\chris\framework\builder\annotation\ExpandField.class
 com\chris\framework\builder\annotation\query\Query.class
