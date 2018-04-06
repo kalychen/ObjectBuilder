@@ -423,7 +423,6 @@ public class EntityUtils {
             e.printStackTrace();
             return null;
         }
-        MsgUtils.println(JsonUtils.toJson(rowData.keySet()));
         //2. 获取entity的类
         Class<?> entityClass = entity.getClass();
         //3. 获取字段

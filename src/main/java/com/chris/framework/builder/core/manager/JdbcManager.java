@@ -39,4 +39,5 @@ public class JdbcManager {
         };
         return jdbcTemplate.query(sql, rowMapper);
     }
+
 }
