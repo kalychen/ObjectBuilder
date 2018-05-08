@@ -29,6 +29,7 @@ com\chris\framework\builder\libs\springboot\repository\BaseRepositoryFactoryBean
 com\chris\framework\builder\annotation\query\compare\LikeStart.class
 com\chris\framework\builder\annotation\persistence\Persistence.class
 com\chris\framework\builder\annotation\Provider.class
+com\chris\framework\builder\utils\Codec.class
 com\chris\framework\builder\model\object\QueryObject.class
 com\chris\framework\builder\core\exception\ProviderNotFoundException.class
 com\chris\framework\builder\model\Orm.class
