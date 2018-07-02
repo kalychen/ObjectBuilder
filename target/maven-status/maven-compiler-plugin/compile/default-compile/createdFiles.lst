@@ -116,6 +116,7 @@ com\chris\framework\builder\libs\springboot\repository\BaseRepositoryImpl.class
 com\chris\framework\builder\model\Sort.class
 com\chris\framework\builder\net\exception\NoAuthorityException.class
 com\chris\framework\builder\annotation\authority\AuthorityCheck.class
+com\chris\framework\builder\model\EntityBuildParams.class
 com\chris\framework\builder\utils\StringUtils.class
 com\chris\framework\builder\model\PageParams.class
 com\chris\framework\builder\model\Pageable.class

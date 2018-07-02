@@ -6,10 +6,7 @@ import com.chris.framework.builder.annotation.query.PageParam;
 import com.chris.framework.builder.annotation.query.Query;
 import com.chris.framework.builder.annotation.query.QueryCompare;
 import com.chris.framework.builder.annotation.query.QueryField;
-import com.chris.framework.builder.model.BuildParams;
-import com.chris.framework.builder.model.Column;
-import com.chris.framework.builder.model.PageParams;
-import com.chris.framework.builder.model.TimeRange;
+import com.chris.framework.builder.model.*;
 import com.chris.framework.builder.model.object.QueryParams;
 
 import javax.persistence.Entity;
@@ -218,23 +215,27 @@ public class DatabaseUtils {
      * @param params
      * @return
      */
-    public static String buildeOrmContent(BuildParams params) {
-        String tableName = params.getTableName();
+    public static String buildeOrmContent(EntityBuildParams params, String tableName, String className) {
         List<Column> tableColumnList = DatabaseUtils.getTableColumnList(params.getConnection(), tableName);
 
         StringBuffer entityHead = new StringBuffer();//头部，包括包名定义和导入包部分
         StringBuffer entityHeadNotes = new StringBuffer();//实体类头部注释
         StringBuffer entityBody = new StringBuffer();//实体类内容
-        String entityName = StringUtils.getUpperCamel(tableName) + params.getOrmExt();
+        String entityName = StringUtils.getUpperCamel(className) + params.getOrmExt();
         String ormPackageName = params.getOrmPackageName();
 
         //构建头部
         Set<String> entityImportSet = new HashSet<>();
         entityHead.append("package ").append(ormPackageName).append(";\n")//包名
-                .append("\n")
-                .append("import javax.persistence.*;\n");
+                .append("\n");
+//                .append("import javax.persistence.*;\n");
 
         entityImportSet.add("javax.persistence.*");
+        ////在导入类中添加类注解的导入
+        for (Map.Entry<String, String> entry : params.getIptAnnoMap().entrySet()) {
+            entityImportSet.add(entry.getValue());
+            entityBody.append("@" + entry.getKey() + "\n");//自由添加的注解
+        }
         //构建头部注释
         entityHeadNotes.append("/**")
                 .append("\n * App: ")
@@ -276,7 +277,9 @@ public class DatabaseUtils {
             }
 
             //字段
-            entityBody.append("    public ")
+            entityBody.append("    ")
+                    .append(params.getFieldModifier())
+                    .append(" ")
                     .append(StringUtils.getSimpleClassNameFromFullClassName(columnClassName))
                     .append(" ")
                     .append(StringUtils.getLowerCamel(column.getColumnName()))
@@ -480,16 +483,27 @@ public class DatabaseUtils {
      *
      * @param params
      */
-    public static void createOrms(BuildParams params) {
+    public static void createOrms(EntityBuildParams params) {
         Connection connection = params.getConnection();
         //获取数据库结构
         Map<String, List<Column>> dataBaseStructMap = getDataBaseStructMap(connection);
         //遍历，创建实体类
         Set<String> keySet = dataBaseStructMap.keySet();
         for (String tableName : keySet) {
-            params.setTableName(tableName);
-            IoUtils.createFileInPackage(params.getOrmPackageName(), StringUtils.getUpperCamel(tableName) + params.getOrmExt() + ".java", buildeOrmContent(params));
+            String className = getClassNameFromTableName(params, tableName);
+            IoUtils.createFileInPackage(params.getOrmPackageName(), StringUtils.getUpperCamel(className) + params.getOrmExt() + ".java", buildeOrmContent(params, tableName, className));
         }
+    }
+
+    //从表明生成一个合法的类名
+    private static String getClassNameFromTableName(EntityBuildParams params, String tableName) {
+        Map<String, String> ormClassNameReplaces = params.getTableNameReplaces();
+        String className = tableName;
+        //替换类名部分
+        for (Map.Entry<String, String> entry : ormClassNameReplaces.entrySet()) {
+            className = className.replace(entry.getKey(), entry.getValue());
+        }
+        return className;
     }
 
     /**
