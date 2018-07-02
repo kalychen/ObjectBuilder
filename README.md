@@ -1,6 +1,13 @@
 # ObjectBuilder
 这个框架应用于在Springboot项目中快速获取数据和快书构建数据结构返回给前端，而不用很繁琐地逐字段处理，逐层次封装。
 
+# 依赖
+        <dependency>
+            <groupId>com.github.kalychen</groupId>
+            <artifactId>ObjectBuilder</artifactId>
+            <version>1.0.6</version>
+        </dependency>
+
 # 创建实体类的方法
 public class CreateTest {
 
